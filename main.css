@@ -1,0 +1,37 @@
+body {
+    background-color: #2d91a1;
+    margin: 0 auto;
+    max-width: 75%;
+}
+
+header {
+    overflow: auto;
+    margin: 1em 0;
+    padding: 2em 0;
+    background-color: white;
+  }
+
+   header h1 {
+    margin: 0 auto;
+    text-align: center;
+    width:max-content;
+    font-size: 4em;
+  }
+
+  nav {
+    display: flex;
+    justify-content: center;
+    margin: 1em 0;
+    
+  }
+
+  nav ul {
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+  }
+
+  nav ul li {
+    list-style-type: none;
+    margin: 0em 2em;
+  }
