@@ -1,3 +1,32 @@
+-- Neighbors-related DML
+-- get all Neighbor's data to browse all Neighbors
+SELECT neighborID, firstName, lastName, neighborPhone FROM Neighbors;
+
+-- get a single Neighbor's data for the Update Neighbor form
+SELECT neighborID, firstName, lastName, neighborPhone FROM Neighbors WHERE neighborID = :neighborIDSelected;
+
+-- get a single Neighbor's data for the Delete Neighbor form
+SELECT neighborID, firstName, lastName, neighborPhone FROM Neighbors WHERE neighborID = :neighborIDSelected;
+
+
+
+-- Locations-related DML
+-- get all Location's data to browse all Locations
+SELECT locationID, locationName, address1, address2, locationCity, locationState, locationZip, communityName
+FROM Locations
+INNER JOIN Communities ON communityID = community;
+
+-- get a single Location's data for the Update Neighbor form
+SELECT locationID, firstName, lastName, neighborPhone FROM Neighbors WHERE neighborID = :neighborIDSelected;
+
+-- get a single Location's data for the Delete Neighbor form
+SELECT locationID, firstName, lastName, neighborPhone FROM Neighbors WHERE neighborID = :neighborIDSelected;
+
+-- add a new Location
+INSERT INTO Locations (locationName, address1, address2, locationCity, locationState, locationZip, communityID)
+VALUES (:locationNameInsert, :locationaddress1Insert, :locationaddress2Insert, :locationCityInsert,
+        :locationaStateInsert, :locationZipCodeInsert, :communityIDInsert);
+
 
 -- Certifications-related DML
 -- get a single Certification's data for the Update Certifications form
