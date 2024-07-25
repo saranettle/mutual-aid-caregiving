@@ -1,13 +1,3 @@
-body { 
-  background-color: rgb(43, 128, 157);
-  margin: 0 auto;
-  max-width: 75%;
-}
-
-header, footer {
-  background-color: rgba(255, 255, 255, 0.81);
-  border-radius: 15px;
-}
 
 header {
   overflow: auto;
@@ -16,21 +6,20 @@ header {
   padding: 2em 0;
 }
 
+
  header h1 {
   margin: 0 auto;
   text-align: center;
   width:max-content;
   font-size: 4em;
-    
+
 }
 
 
-main {
-  background-color: hsla(0, 0%, 100%, 0.81);
-  border: .3em double black;
-  padding: .5em 2em;
+header, footer {
+  background-color: rgba(255, 255, 255, 0.81);
+  border-radius: 15px;
 }
-
 
 
 footer {
@@ -41,41 +30,47 @@ footer {
 }
 
 
-
-nav {
-  clear: both;
-  display: flex;
-  margin: 1em 0;
-}
-nav a {
-
-  font-size: 1.25em;
-  text-align: center;
+body {
+  background-color: rgb(43, 128, 157);
   margin: 0 auto;
-  padding: .5em;
-  width: 100%;
-
+  max-width: 85%;
 }
+
+
+
+
+
+
+
+main {
+  background-color: hsla(0, 0%, 100%, 0.81);
+  border: .3em double black;
+  padding: .5em 2em;
+}
+
+
 
 
 h1, h2, h3, h4, h5, h6 {
   text-align: center;
 } 
 
+
 h2 {
   font-size: 2em;
 }
-
 
 
 form {
   margin-bottom: 0.5em;
 }
 
+
 label {
   display: flex;
   flex-direction: column;
 }
+
 
 button {
   text-align: center;
@@ -84,13 +79,21 @@ button {
 }
 
 
-
 nav {
   display: flex;
   justify-content: center;
   margin: 1em 0;
-  
+  clear: both;
 }
+
+nav a {
+  font-size: 1.25em;
+  text-align: center;
+  margin: 0 auto;
+  padding: .5em;
+  width: 100%;
+}
+
 
 nav ul {
   display: flex;
@@ -98,16 +101,19 @@ nav ul {
   flex-direction: row;
 }
 
+
 nav ul li {
   list-style-type: none;
-  margin: 0em 2em;
+  margin: .8em;
 }
+
 
 table {
   border-collapse: collapse;
   text-align: left;
   width: 100%;
 }
+
 
 tr th {
   border-bottom: solid black;

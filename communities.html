@@ -1,0 +1,152 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+ Original UI design
+ credit Prof. Danielle Safonte
+ bsg_html_UI.zip
+ https://canvas.oregonstate.edu/courses/1967354/assignments/9690212?module_item_id=24460842
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Communities</title>
+    <link rel="stylesheet" href="main.css">
+    <script language="JavaScript">
+        function showform(dowhat) {
+            /*
+            * four DIVS: browse, insert, update, delete
+            * this function sets one visible the others not
+            */
+            if (dowhat == 'insert'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'update'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'delete'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'block';
+            }
+            else if (dowhat == 'all'){
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'block';
+            }
+            else { //by default display browse
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+        }
+        function newCommunity() { showform('insert'); }
+        function updateCommunity(pid) { showform('update'); }
+        function deleteCommunity(pid) { showform ('delete'); }
+        function browseCommunities() { showform ('browse'); }
+        function showAll() { showform ('all'); }
+    </script>
+</head>
+
+<body onload="browseCommunities()">
+<header>
+    <h1>Mutual Aid Caregiving</h1>
+    <h2>Communities</h2>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="neighbors.html">Neighbors</a></li>
+            <li><a href="locations.html">Locations</a></li>
+            <li><a href="communities.html">Communities</a></li>
+            <li><a href="visits.html">Visits</a></li>
+            <li><a href="certifications.html">Certifications</a></li>
+            <li><a href="visit_types.html">Visit Types</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div id="browse">
+        <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+        <table border="1" cellpadding="5">
+            <tr>
+                <th><a href="#" onClick="newCommunity()">New</a></th>
+                <th></th>
+                <th>communityID</th>
+                <th>communityName</th>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateCommunity('this.communityID')">Edit</a></td>
+                <td><a href="#" onclick="deleteCommunity('this.communityID')">Delete</a></td>
+                <td align="right" >1</td>
+                <td >North Bay Hills</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateCommunity('this.communityID')">Edit</a></td>
+                <td><a href="#" onclick="deleteCommunity('this.communityID')">Delete</a></td>
+                <td align="right" >2</td>
+                <td>Vista Apartments</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateCommunity('this.communityID')">Edit</a></td>
+                <td><a href="#" onclick="deleteCommunity('this.communityID')">Delete</a></td>
+                <td align="right" >3</td>
+                <td>Gooseberry Collective</td>
+            </tr>
+        </table>
+        <p>&nbsp;</p>
+    </div> <!-- browse -->
+    <div id="insert">
+        <form method="POST" id="addCommunity">
+            <legend><strong>Add Community</strong></legend>
+            <fieldset class="fields">
+                <label> Community Name </label> <input type="text" name="communityName">
+            </fieldset>
+            <input class="btn" type="submit" id="addCommunityBtn" value="Add Community">
+            <input class="btn" type="button" value="cancel" onClick="browseCommunities()">
+        </form>
+    </div><!-- insert -->
+    <p>&nbsp;</p>
+    <div id="update">
+        <form method="POST" id="updateCommunity">
+            <legend><strong>Update Community</strong></legend>
+            <fieldset class="fields">
+                <input type="hidden" name="communityID" id="updateCommunityID" value="1">
+                <label> ID: </label> 1
+                <label> Community Name </label> <input type="text" name="communityName">
+            </fieldset>
+            <input class="btn" type="submit" id="UpdateSaveCommunity" value="Save Update Community">
+            <input class="btn" type="button" value="cancel" onClick="browseCommunities()">
+        </form>
+    </div><!-- update -->
+    <p>&nbsp;</p>
+    <div id="delete" style="display: block">
+        <form method="POST" id="deleteCommunity">
+            <legend><strong>Delete Community</strong></legend>
+            <fieldset class="fields">
+                <p>Are you sure you wish to delete the following?</p>
+                <input type="hidden" name="communityID" id="deleteCommunityID" value="1">
+                <label><strong>ID:</strong></label> 1
+                <label> <strong>Community Name</strong> </label> North Bay Hills
+
+            </fieldset>
+            <input class="btn" type="submit" id="DeleteCommunityBtn" value="Delete Community">
+            <input class="btn" type="button" value="cancel" onClick="browseCommunities()">
+        </form>
+    </div><!-- delete -->
+</main>
+
+<footer>
+    <p>Made by Chris Blum and Sara Nettle 2024</p>
+</footer>
+
+</body>

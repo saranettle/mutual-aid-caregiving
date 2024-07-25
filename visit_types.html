@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+ Original UI design
+ credit Prof. Danielle Safonte
+ bsg_html_UI.zip
+ https://canvas.oregonstate.edu/courses/1967354/assignments/9690212?module_item_id=24460842
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Visit Types</title>
+    <link rel="stylesheet" href="main.css">
+    <script language="JavaScript">
+        function showform(dowhat) {
+            /*
+            * four DIVS: browse, insert, update, delete
+            * this function sets one visible the others not
+            */
+            if (dowhat == 'insert'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'update'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'delete'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'block';
+            }
+            else if (dowhat == 'all'){
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'block';
+            }
+            else { //by default display browse
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+        }
+        function newVisitType() { showform('insert'); }
+        function updateVisitType(pid) { showform('update'); }
+        function deleteVisitType(pid) { showform ('delete'); }
+        function browseVisitTypes() { showform ('browse'); }
+        function showAll() { showform ('all'); }
+    </script>
+</head>
+
+<body onload="browseVisitTypes()">
+<header>
+        <h1>Mutual Aid Caregiving</h1>
+        <h2>Visit Types</h2>
+            <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="neighbors.html">Neighbors</a></li>
+            <li><a href="locations.html">Locations</a></li>
+            <li><a href="communities.html">Communities</a></li>
+            <li><a href="visits.html">Visits</a></li>
+            <li><a href="certifications.html">Certifications</a></li>
+            <li><a href="visit_types.html">Visit Types</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div id="browse">
+        <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+        <table border="1" cellpadding="5">
+            <tr>
+                <th><a href="#" onClick="newVisitType()">New</a></th>
+                <th></th>
+                <th>visitTypeID</th>
+                <th>visitTypeName</th>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateVisitType('this.visitTypeID')">Edit</a></td>
+                <td><a href="#" onclick="deleteVisitType('this.visitTypeID')">Delete</a></td>
+                <td align="right" >1</td>
+                <td >Childcare</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateVisitType('this.visitTypeID')">Edit</a></td>
+                <td><a href="#" onclick="deleteVisitType('this.visitTypeID')">Delete</a></td>
+                <td align="right" >2</td>
+                <td>Eldercare</td>
+            </tr>
+        </table>
+        <p>&nbsp;</p>
+    </div> <!-- browse -->
+    <div id="insert">
+        <form method="POST" id="addVisitType">
+            <legend><strong>Add Visit Type</strong></legend>
+            <fieldset class="fields">
+                <label> Visit Type Name </label> <input type="text" name="visitTypeName">
+            </fieldset>
+            <input class="btn" type="submit" id="addVisitTypeBtn" value="Add Visit Type">
+            <input class="btn" type="button" value="cancel" onClick="browseVisitTypes()">
+        </form>
+    </div><!-- insert -->
+    <p>&nbsp;</p>
+    <div id="update">
+        <form method="POST" id="updateVisitType">
+            <legend><strong>Update Visit Type</strong></legend>
+            <fieldset class="fields">
+                <input type="hidden" name="visitTypeID" id="updateVisitTypeID" value="1">
+                <label> ID: </label> 1
+                <label> Visit Type Name </label> <input type="text" name="visitTypeName">
+            </fieldset>
+            <input class="btn" type="submit" id="UpdateSaveVisitType" value="Save Update Visit Type">
+            <input class="btn" type="button" value="cancel" onClick="browseVisitTypes()">
+        </form>
+    </div><!-- update -->
+    <p>&nbsp;</p>
+    <div id="delete" style="display: block">
+        <form method="POST" id="deleteVisitType">
+            <legend><strong>Delete Visit Type</strong></legend>
+            <fieldset class="fields">
+                <p>Are you sure you wish to delete the following?</p>
+                <input type="hidden" name="visitTypeID" id="deleteVisitTypeID" value="1">
+                <label><strong>ID:</strong></label> 1
+                <label> <strong>Visit Type Name</strong> </label> Childcare
+
+            </fieldset>
+            <input class="btn" type="submit" id="DeleteVisitTypeBtn" value="Delete Visit Type">
+            <input class="btn" type="button" value="cancel" onClick="browseVisitTypes()">
+        </form>
+    </div><!-- delete -->
+</main>
+
+<footer>
+    <p>Made by Chris Blum and Sara Nettle 2024</p>
+</footer>
+
+</body>
