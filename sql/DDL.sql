@@ -15,15 +15,15 @@ DROP TABLE IF EXISTS Communities;
 --
 
 -- Create table for Communities
-CREATE OR REPLACE TABLE Communities (
-    communityID int(11) UNIQUE NOT NULL AUTO_INCREMENT,
+CREATE TABLE Communities (
+    communityID int(11) AUTO_INCREMENT,
     communityName varchar(50) NOT NULL,
     PRIMARY KEY(communityID)
 );
 
 -- Create table for Neighbors
-CREATE OR REPLACE TABLE Neighbors (
-    neighborID int(11) UNIQUE NOT NULL AUTO_INCREMENT,
+CREATE TABLE Neighbors (
+    neighborID int(11) AUTO_INCREMENT,
     firstName varchar(50) NOT NULL,
     lastName varchar(50) NOT NULL,
     neighborPhone varchar(50) NOT NULL,
@@ -32,8 +32,8 @@ CREATE OR REPLACE TABLE Neighbors (
 );
 
 -- Create table for CommunityHasNeighbors (intersection table)
-CREATE OR REPLACE TABLE CommunityHasNeighbors (
-    communityHasNeighborID int(11) UNIQUE NOT NULL AUTO_INCREMENT,
+CREATE TABLE CommunityHasNeighbors (
+    communityHasNeighborID int(11) AUTO_INCREMENT,
     neighbor int(11) NOT NULL,
     community int(11) NOT NULL,
     CONSTRAINT FOREIGN KEY (neighbor)
@@ -44,15 +44,15 @@ CREATE OR REPLACE TABLE CommunityHasNeighbors (
 );
 
 -- Create table for Certifications
-CREATE OR REPLACE TABLE Certifications (
-    certificationID int(11) UNIQUE NOT NULL AUTO_INCREMENT,
+CREATE TABLE Certifications (
+    certificationID int(11) AUTO_INCREMENT,
     certificationTitle varchar(50) UNIQUE NOT NULL,
     PRIMARY KEY (certificationID)
 );
 
 -- Create table for NeighborHasCertifications (intersection table)
-CREATE OR REPLACE TABLE NeighborHasCertifications (
-    neighborHasCertificationID int(11) UNIQUE NOT NULL AUTO_INCREMENT,
+CREATE TABLE NeighborHasCertifications (
+    neighborHasCertificationID int(11) AUTO_INCREMENT,
     neighbor int(11) NOT NULL,
     certification int(11) NOT NULL,
     CONSTRAINT FOREIGN KEY (neighbor)
@@ -63,8 +63,8 @@ CREATE OR REPLACE TABLE NeighborHasCertifications (
 );
 
 -- Create table for Locations
-CREATE OR REPLACE TABLE Locations (
-    locationID int(11) UNIQUE NOT NULL AUTO_INCREMENT,
+CREATE TABLE Locations (
+    locationID int(11) AUTO_INCREMENT,
     locationName varchar(50) UNIQUE NOT NULL,
     address1 varchar(50) NOT NULL,
     address2 varchar(50),
@@ -78,16 +78,16 @@ CREATE OR REPLACE TABLE Locations (
 );
 
 -- Create table for VisitTypes
-CREATE OR REPLACE TABLE VisitTypes (
-    visitTypeID int(11) UNIQUE NOT NULL AUTO_INCREMENT,
+CREATE TABLE VisitTypes (
+    visitTypeID int(11) AUTO_INCREMENT,
     typeName varchar(50) UNIQUE NOT NULL,
     typeDescription varchar(250) NOT NULL,
     PRIMARY KEY (visitTypeID)
 );
 
 -- Create table for Visits
-CREATE OR REPLACE TABLE Visits (
-    visitID int(11) UNIQUE NOT NULL AUTO_INCREMENT,
+CREATE TABLE Visits (
+    visitID int(11) AUTO_INCREMENT,
     neighbor int(11) NOT NULL,
     caregiver int(11) DEFAULT NULL,
     startTime datetime NOT NULL,
