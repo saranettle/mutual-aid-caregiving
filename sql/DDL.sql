@@ -37,9 +37,11 @@ CREATE TABLE CommunityHasNeighbors (
     neighbor int(11) NOT NULL,
     community int(11) NOT NULL,
     CONSTRAINT FOREIGN KEY (neighbor)
-    REFERENCES Neighbors(neighborID),
+    REFERENCES Neighbors(neighborID)
+    ON DELETE CASCADE,
     CONSTRAINT FOREIGN KEY (community)
-    REFERENCES Communities(communityID),
+    REFERENCES Communities(communityID)
+    ON DELETE RESTRICT,
     PRIMARY KEY(communityHasNeighborID)
 );
 
@@ -56,9 +58,11 @@ CREATE TABLE NeighborHasCertifications (
     neighbor int(11) NOT NULL,
     certification int(11) NOT NULL,
     CONSTRAINT FOREIGN KEY (neighbor)
-    REFERENCES Neighbors(neighborID),
+    REFERENCES Neighbors(neighborID)
+    ON DELETE CASCADE,
     CONSTRAINT FOREIGN KEY (certification)
-    REFERENCES Certifications(certificationID),
+    REFERENCES Certifications(certificationID)
+    ON DELETE CASCADE,
     PRIMARY KEY (neighborHasCertificationID)
 );
 
@@ -73,7 +77,8 @@ CREATE TABLE Locations (
     locationZip varchar(50) NOT NULL,
     community int(11) NOT NULL,
     CONSTRAINT FOREIGN KEY (community)
-    REFERENCES Communities(communityID),
+    REFERENCES Communities(communityID)
+    ON DELETE RESTRICT,
     PRIMARY KEY (locationID)
 );
 
@@ -97,13 +102,17 @@ CREATE TABLE Visits (
     visitNotes varchar(250),
     fulfilled boolean NOT NULL DEFAULT FALSE,
     CONSTRAINT FOREIGN KEY (neighbor)
-    REFERENCES Neighbors(neighborID),
+    REFERENCES Neighbors(neighborID)
+    ON DELETE SET NULL,
     CONSTRAINT FOREIGN KEY (caregiver)
-    REFERENCES Neighbors(neighborID),
+    REFERENCES Neighbors(neighborID)
+    ON DELETE SET DEFAULT,
     CONSTRAINT FOREIGN KEY (visitType)
-    REFERENCES VisitTypes(visitTypeID),
+    REFERENCES VisitTypes(visitTypeID)
+    ON DELETE SET NULL,
     CONSTRAINT FOREIGN KEY (location)
-    REFERENCES Locations(locationID),
+    REFERENCES Locations(locationID)
+    ON DELETE SET NULL,
     PRIMARY KEY (visitID)
 );
 
