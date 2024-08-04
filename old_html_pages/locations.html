@@ -1,0 +1,278 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+ Original UI design
+ credit Prof. Danielle Safonte
+ bsg_html_UI.zip
+ https://canvas.oregonstate.edu/courses/1967354/assignments/9690212?module_item_id=24460842
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Locations</title>
+    <link rel="stylesheet" href="main.css">
+    <script language="JavaScript">
+        function showform(dowhat) {
+            /*
+            * four DIVS: browse, insert, update, delete
+            * this function sets one visible the others not
+            */
+            if (dowhat == 'insert'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'update'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'delete'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'block';
+            }
+            else if (dowhat == 'all'){
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'block';
+            }
+            else { //by default display browse
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+        }
+        function newLocations() { showform('insert'); }
+        function updateLocations(pid) { showform('update'); }
+        function deleteLocations(pid) { showform ('delete'); }
+        function browseLocations() { showform ('browse'); }
+        function showAll() { showform ('all'); }
+    </script>
+</head>
+
+<body onload="browseLocations()">
+<header>
+    <h1>Mutual Aid Caregiving</h1>
+    <h2>Locations</h2>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="neighbors.html">Neighbors</a></li>
+            <li><a href="locations.html">Locations</a></li>
+            <li><a href="communities.html">Communities</a></li>
+            <li><a href="visits.html">Visits</a></li>
+            <li><a href="certifications.html">Certifications</a></li>
+            <li><a href="visit_types.html">Visit Types</a></li>
+            <li><a href="certify_neighbors.html">Certify Neighbors</a></li>
+            <li><a href="community_neighbors.html">Community Neighbors</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div id="browse">
+        <p>On this page, you can add, delete, or edit a location. Locations are used to represent the places where visits may take place, are are set by the neighbor who makes the request. They are typically only accessible to neighbors who share a community.</p>
+        <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+        <table border="1" cellpadding="5">
+            <tr>
+                <th><a href="#" onClick="newLocations()">New</a></th>
+                <th></th>
+                <th>locationID</th>
+                <th>locationName</th>
+                <th>address1</th>
+                <th>address2</th>
+                <th>locationCity</th>
+                <th>locationState</th>
+                <th>locationZip</th>
+                <th>community</th>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateLocations('this.locationID')">Edit</a></td>
+                <td><a href="#" onclick="deleteLocations('this.locationID')">Delete</a></td>
+                <td align="right" >1</td>
+                <td >Lorna's House</td>
+                <td >42 NW 4th Ave</td>
+                <td >NULL</td>
+                <td >Friendly City</td>
+                <td >GA</td>
+                <td >30002</td>
+                <td >North Bay Hills</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateLocations('this.locationID')">Edit</a></td>
+                <td><a href="#" onclick="deleteLocations('this.locationID')">Delete</a></td>
+                <td align="right" >2</td>
+                <td >Zaina's House</td>
+                <td >50 NW 4th Ave</td>
+                <td >NULL</td>
+                <td >Friendly City</td>
+                <td >GA</td>
+                <td >30002</td>
+                <td >North Bay Hills</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateLocations('this.locationID')">Edit</a></td>
+                <td><a href="#" onclick="deleteLocations('this.locationID')">Delete</a></td>
+                <td align="right" >3</td>
+                <td >The Frye Residence</td>
+                <td >73 NW 4th Ave</td>
+                <td >NULL</td>
+                <td >Friendly City</td>
+                <td >GA</td>
+                <td >30002</td>
+                <td >North Bay Hills</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateLocations('this.locationID')">Edit</a></td>
+                <td><a href="#" onclick="deleteLocations('this.locationID')">Delete</a></td>
+                <td align="right" >4</td>
+                <td >Friendly City Public Library</td>
+                <td >15 Main St</td>
+                <td >NULL</td>
+                <td >Friendly City</td>
+                <td >GA</td>
+                <td >30002</td>
+                <td >Vista Apartments</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateLocations('this.locationID')">Edit</a></td>
+                <td><a href="#" onclick="deleteLocations('this.locationID')">Delete</a></td>
+                <td align="right" >5</td>
+                <td >Apartment 217</td>
+                <td >55 MLK Rd</td>
+                <td >Apt 217</td>
+                <td >Friendly City</td>
+                <td >GA</td>
+                <td >30002</td>
+                <td >Vista Apartments</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateLocations('this.locationID')">Edit</a></td>
+                <td><a href="#" onclick="deleteLocations('this.locationID')">Delete</a></td>
+                <td align="right" >6</td>
+                <td >Apartment Community Room</td>
+                <td >55 MLK Rd</td>
+                <td >NULL</td>
+                <td >Friendly City</td>
+                <td >GA</td>
+                <td >30002</td>
+                <td >Vista Apartments</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateLocations('this.locationID')">Edit</a></td>
+                <td><a href="#" onclick="deleteLocations('this.locationID')">Delete</a></td>
+                <td align="right" >7</td>
+                <td >Bayside Community Cente</td>
+                <td >33 River St</td>
+                <td >NULL</td>
+                <td >Friendly City</td>
+                <td >GA</td>
+                <td >30002</td>
+                <td >Gooseberry Collective</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateLocations('this.locationID')">Edit</a></td>
+                <td><a href="#" onclick="deleteLocations('this.locationID')">Delete</a></td>
+                <td align="right" >8</td>
+                <td >The Newman Residence</td>
+                <td >112 SE 23rd Ave</td>
+                <td >NULL</td>
+                <td >Friendly City</td>
+                <td >GA</td>
+                <td >30002</td>
+                <td >Gooseberry Collective</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateLocations('this.locationID')">Edit</a></td>
+                <td><a href="#" onclick="deleteLocations('this.locationID')">Delete</a></td>
+                <td align="right" >9</td>
+                <td >Jac's Townhome</td>
+                <td >103 SE 20th Ave</td>
+                <td >Unit B</td>
+                <td >Friendly City</td>
+                <td >GA</td>
+                <td >30002</td>
+                <td >Gooseberry Collective</td>
+            </tr>
+        </table>
+        <p>&nbsp;</p>
+    </div> <!-- browse -->
+    <div id="insert">
+        <form method="POST" id="addLocations">
+            <fieldset class="fields">
+                <legend><strong>Add Location</strong></legend>
+                <label> Name </label> <input type="text" name="locationNameInsert">
+                <label> Address 1 </label> <input type="text" name="address1Insert">
+                <label> Address 2 </label> <input type="text" name="address2Insert">
+                <label> City </label> <input type="text" name="locationCityInsert">
+                <label> State </label> <input type="text" name="locationStateInsert">
+                <label> Zip Code </label> <input type="text" name="locationZipInsert">
+                <label for="communityInsert"> Community </label>
+                <select id="communityInsert" name="communityInsert">
+                    <option value="0">&nbsp;</option>
+                    <option value="1">North Bay Hills</option>
+                    <option value="2">Vista Apartments</option>
+                    <option value="3">Gooseberry Collective</option>
+                </select>
+            </fieldset>
+            <input class="btn" type="submit" id="addLocationsBtn" value="Add Location">
+            <input class="btn" type="button" value="cancel" onClick="browseLocations()">
+        </form>
+    </div><!-- insert -->
+    <p>&nbsp;</p>
+    <div id="update">
+        <form method="POST" id="updateLocations">
+            <fieldset class="fields">
+                <legend><strong>Update Location</strong></legend>
+                <label> Name </label> <input type="text" name="locationNameUpdate" value="Lorna's House">
+                <label> Address 1 </label> <input type="text" name="address1Update" value="42 NW 4th Ave">
+                <label> Address 2 </label> <input type="text" name="address2Update">
+                <label> City </label> <input type="text" name="locationCityUpdate" value="Friendly City">
+                <label> State </label> <input type="text" name="locationStateUpdate" value="GA">
+                <label> Zip Code </label> <input type="text" name="locationZipUpdate" value="30002">
+                <label for="communityUpdate"> Community </label>
+                <select id="communityUpdate" name="communityUpdate">
+                    <option value="0">&nbsp;</option>
+                    <option value="1" selected>North Bay Hills</option>
+                    <option value="2">Vista Apartments</option>
+                    <option value="3">Gooseberry Collective</option>
+                </select>
+            </fieldset>
+            <input class="btn" type="submit" id="UpdateSaveLocations" value="Save Update Location">
+            <input class="btn" type="button" value="cancel" onClick="browseLocations()">
+        </form>
+    </div><!-- update -->
+    <p>&nbsp;</p>
+    <div id="delete" style="display: block">
+        <form method="POST" id="deleteLocations">
+            <fieldset class="fields">
+                <legend><strong>Delete Location</strong></legend>
+                <p>Are you sure you wish to delete the following?</p>
+                <input type="hidden" name="locationID" id="deleteLocationsID" value="1">
+                <label><strong>ID:</strong></label> 1
+                <label> <strong> Name </strong> </label> Lorna's House
+                <label> <strong> Address 1 </strong> </label> 42 NW 4th Ave
+                <label> <strong> Address 2 </strong> </label> NULL
+                <label> <strong> City </strong> </label> Friendly City
+                <label> <strong> State </strong> </label> GA
+                <label> <strong>  Zip Code </strong> </label> 30002
+                <label> <strong> Community </strong> </label> North Bay Hills
+            </fieldset>
+            <input class="btn" type="submit" id="DeleteLocationsBtn" value="Delete Location">
+            <input class="btn" type="button" value="cancel" onClick="browseLocations()">
+        </form>
+    </div><!-- delete -->
+</main>
+
+<footer>
+    <p>Made by Chris Blum and Sara Nettle 2024</p>
+</footer>
+
+</body>

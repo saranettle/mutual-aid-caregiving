@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+ Original UI design
+ credit Prof. Danielle Safonte
+ bsg_html_UI.zip
+ https://canvas.oregonstate.edu/courses/1967354/assignments/9690212?module_item_id=24460842
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Neighbors</title>
+    <link rel="stylesheet" href="main.css">
+    <script language="JavaScript">
+        function showform(dowhat) {
+            /*
+            * four DIVS: browse, insert, update, delete
+            * this function sets one visible the others not
+            */
+            if (dowhat == 'insert'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'update'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'delete'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'block';
+            }
+            else if (dowhat == 'all'){
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'block';
+            }
+            else { //by default display browse
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+        }
+        function newNeighbors() { showform('insert'); }
+        function updateNeighbors(pid) { showform('update'); }
+        function deleteNeighbors(pid) { showform ('delete'); }
+        function browseNeighbors() { showform ('browse'); }
+        function showAll() { showform ('all'); }
+    </script>
+</head>
+
+<body onload="browseNeighbors()">
+<header>
+    <h1>Mutual Aid Caregiving</h1>
+    <h2>Neighbors</h2>
+    <nav>
+        <ul>
+            <li><a href="index.html">Home</a></li>
+            <li><a href="neighbors.html">Neighbors</a></li>
+            <li><a href="locations.html">Locations</a></li>
+            <li><a href="communities.html">Communities</a></li>
+            <li><a href="visits.html">Visits</a></li>
+            <li><a href="certifications.html">Certifications</a></li>
+            <li><a href="visit_types.html">Visit Types</a></li>
+            <li><a href="certify_neighbors.html">Certify Neighbors</a></li>
+            <li><a href="community_neighbors.html">Community Neighbors</a></li>
+            <li><a href="about.html">About</a></li>
+        </ul>
+    </nav>
+</header>
+<main>
+    <div id="browse">
+        <p>On this page, you can add, edit, or delete a neighbor. Note that when you add or edit a neighbor, you cannot include information regarding whether they have certifications. To do that, you will need to visit <a href="certify_neighbors.html">this page</a>.</p>
+        <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+        <table border="1" cellpadding="5">
+            <tr>
+                <th><a href="#" onClick="newNeighbors()">New</a></th>
+                <th></th>
+                <th>neighborID</th>
+                <th>firstName</th>
+                <th>lastName</th>
+                <th>neighborPhone</th>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighbors('this.neighborID')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighbors('this.neighborID')">Delete</a></td>
+                <td align="right" >1</td>
+                <td >Zaina</td>
+                <td >Hopkins</td>
+                <td >333-111-1111</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighbors('this.neighborID')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighbors('this.neighborID')">Delete</a></td>
+                <td align="right" >2</td>
+                <td >Lorna</td>
+                <td >McClain</td>
+                <td >333-222-2222</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighbors('this.neighborID')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighbors('this.neighborID')">Delete</a></td>
+                <td align="right" >3</td>
+                <td >Mikolaj</td>
+                <td >Frye</td>
+                <td >333-333-3333</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighbors('this.neighborID')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighbors('this.neighborID')">Delete</a></td>
+                <td align="right" >4</td>
+                <td >Aliza</td>
+                <td >Moran</td>
+                <td >333-444-4444</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighbors('this.neighborID')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighbors('this.neighborID')">Delete</a></td>
+                <td align="right" >5</td>
+                <td >Kyron</td>
+                <td >Lewis</td>
+                <td >333-555-5555</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighbors('this.neighborID')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighbors('this.neighborID')">Delete</a></td>
+                <td align="right" >6</td>
+                <td >Maksymilian</td>
+                <td >Davila</td>
+                <td >333-666-6666</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighbors('this.neighborID')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighbors('this.neighborID')">Delete</a></td>
+                <td align="right" >7</td>
+                <td >Lowri</td>
+                <td >Dillon</td>
+                <td >333-777-7777</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighbors('this.neighborID')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighbors('this.neighborID')">Delete</a></td>
+                <td align="right" >8</td>
+                <td >Beau</td>
+                <td >Mckee</td>
+                <td >333-888-8888</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighbors('this.neighborID')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighbors('this.neighborID')">Delete</a></td>
+                <td align="right" >9</td>
+                <td >Jac</td>
+                <td >Shepherd</td>
+                <td >333-999-9999</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighbors('this.neighborID')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighbors('this.neighborID')">Delete</a></td>
+                <td align="right" >10</td>
+                <td >Krishan</td>
+                <td >Newman</td>
+                <td >333-123-4567</td>
+            </tr>
+        </table>
+        <p>&nbsp;</p>
+    </div> <!-- browse -->
+    <div id="insert">
+        <form method="POST" id="addNeighbors">
+            <fieldset class="fields">
+                <legend><strong>Add Neighbor</strong></legend>
+                <label for="firstNameInsert"> First Name </label> <input type="text" id="firstNameInsert" name="firstNameInsert">
+                <label for="lastNameInsert"> Last Name </label> <input type="text" name="lastNameInsert" id="lastNameInsert">
+                <label for="neighborPhoneInsert"> Phone Number </label> <input type="text" id="neighborPhoneInsert" name="neighborPhoneInsert">
+            </fieldset>
+            <input class="btn" type="submit" id="addNeighborsBtn" value="Add Neighbor">
+            <input class="btn" type="button" value="cancel" onClick="browseNeighbors()">
+        </form>
+    </div><!-- insert -->
+    <p>&nbsp;</p>
+    <div id="update">
+        <form method="POST" id="updateNeighbors">
+            <fieldset class="fields">
+                <legend><strong>Update Neighbor</strong></legend>
+                <label><strong>ID: </strong> 1</label>
+                <label for="firstNameUpdate"> First Name </label> <input type="text" id="firstNameUpdate" name="firstNameUpdate" value="Zaina">
+                <label for="lastNameUpdate"> Last Name </label> <input type="text" name="lastNameUpdate" id="lastNameUpdate" value="Hopkins">
+                <label for="neighborPhoneUpdate"> Phone Number </label> <input type="text" id="neighborPhoneUpdate" name="neighborPhoneUpdate" value="333-111-1111">
+            </fieldset>
+            <input class="btn" type="submit" id="UpdateSaveNeighbors" value="Save Update Neighbor">
+            <input class="btn" type="button" value="cancel" onClick="browseNeighbors()">
+        </form>
+    </div><!-- update -->
+    <p>&nbsp;</p>
+    <div id="delete" style="display: block">
+        <form method="POST" id="deleteNeighbors">
+            <fieldset class="fields">
+                <legend><strong>Delete Neighbor</strong></legend>
+                <p>Are you sure you wish to delete the following?</p>
+                <input type="hidden" name="neighborID" id="deleteNeighborsID" value="1">
+                <label><strong>ID: </strong> 1</label>
+                <label> <strong> First Name </strong> </label> Zaina
+                <label> <strong> Last Name </strong> </label> Hopkins
+                <label> <strong> Phone Number </strong> </label> 333-111-1111
+            </fieldset>
+            <input class="btn" type="submit" id="DeleteNeighborsBtn" value="Delete Neighbor">
+            <input class="btn" type="button" value="cancel" onClick="browseNeighbors()">
+        </form>
+    </div><!-- delete -->
+</main>
+
+<footer>
+    <p>Made by Chris Blum and Sara Nettle 2024</p>
+</footer>
+
+</body>
