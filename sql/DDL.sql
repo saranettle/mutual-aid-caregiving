@@ -93,12 +93,12 @@ CREATE TABLE VisitTypes (
 -- Create table for Visits
 CREATE TABLE Visits (
     visitID int(11) AUTO_INCREMENT,
-    neighbor int(11) NOT NULL,
+    neighbor int(11) DEFAULT NULL,
     caregiver int(11) DEFAULT NULL,
     startTime datetime NOT NULL,
     durationHours int(11) NOT NULL,
-    visitType int(11) NOT NULL,
-    location int(11) NOT NULL,
+    visitType int(11),
+    location int(11),
     visitNotes varchar(250),
     fulfilled boolean NOT NULL DEFAULT FALSE,
     CONSTRAINT FOREIGN KEY (neighbor)
@@ -106,7 +106,7 @@ CREATE TABLE Visits (
     ON DELETE SET NULL,
     CONSTRAINT FOREIGN KEY (caregiver)
     REFERENCES Neighbors(neighborID)
-    ON DELETE SET DEFAULT,
+    ON DELETE SET NULL,
     CONSTRAINT FOREIGN KEY (visitType)
     REFERENCES VisitTypes(visitTypeID)
     ON DELETE SET NULL,
