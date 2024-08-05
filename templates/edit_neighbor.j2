@@ -1,0 +1,61 @@
+<html>
+<!--
+ Original UI design
+ credit Prof. Danielle Safonte
+ bsg_people_app
+ https://github.com/osu-cs340-ecampus/flask-starter-app/tree/24f289773ee051ebb8c83822bd78441ccb1dad33/bsg_people_app
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutual Aid Caregiving</title>
+    <link rel="stylesheet" href="../../static/css/main.css">
+</head>
+<body>
+
+    <header>
+        <h1>Mutual Aid Caregiving</h1>
+        <nav>
+            <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/neighbors">Neighbors</a></li>
+            <li><a href="/locations">Locations</a></li>
+            <li><a href="/communities">Communities</a></li>
+            <li><a href="/visits">Visits</a></li>
+            <li><a href="/certifications">Certifications</a></li>
+            <li><a href="/visit_types">Visit Types</a></li>
+            <li><a href="/certify_neighbors">Certify Neighbors</a></li>
+            <li><a href="/community_neighbors">Community Neighbors</a></li>
+            <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <main>
+
+            <form id="edit_neighbor" action="/edit_neighbor/{{data[0].neighborID}}" method="post">
+			<legend><Add a Neighbor</legend>
+			<fieldset>
+
+                <input type="hidden" value="{{data[0].neighborID}}" class="form-control" id="neighborID" name="neighborID" required>
+
+				<label for="make">First Name</label>
+				<input type="text" class="form-control" id="firstName" name="firstName" value="{{data[0].firstName}}" required>
+
+				<label for="model">Last name:</label>
+				<input type="text" class="form-control" id="lastName" name="lastName" value="{{data[0].lastName}}" required>
+
+				<label for="color">Phone number:</label>
+				<input type="text" class="form-control" id="neighborPhone" name="neighborPhone" value="{{data[0].neighborPhone}}"> 
+            </fieldset>
+
+			<input type="submit" value="Edit Neighbor" name="edit_neighbor">
+            </form>
+
+    </main>
+    <footer>
+        <p>Made by Chris Blum and Sara Nettle 2024</p>
+    </footer>
+    </body>
+    </html>
