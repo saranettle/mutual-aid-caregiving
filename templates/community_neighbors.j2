@@ -1,0 +1,252 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+ Original UI design
+ credit Prof. Danielle Safonte
+ bsg_html_UI.zip
+ https://canvas.oregonstate.edu/courses/1967354/assignments/9690212?module_item_id=24460842
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Community Neighbors</title>
+    <link rel="stylesheet" href="./static/css/main.css">
+    <script language="JavaScript">
+        function showform(dowhat) {
+            /*
+            * four DIVS: browse, insert, update, delete
+            * this function sets one visible the others not
+            */
+            if (dowhat == 'insert'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'update'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'delete'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'block';
+            }
+            else if (dowhat == 'all'){
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'block';
+            }
+            else { //by default display browse
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+        }
+        function newNeighborCommunity() { showform('insert'); }
+        function updateNeighborCommunity(pid) { showform('update'); }
+        function deleteNeighborCommunity(pid) { showform ('delete'); }
+        function browseCommunities() { showform ('browse'); }
+        function showAll() { showform ('all'); }
+    </script>
+</head>
+
+<body onload="browseCommunities()">
+<header>
+    <h1>Mutual Aid Caregiving</h1>
+    <h2>Community Neighbors</h2>
+    <nav>
+        <ul>
+            <li><a href="index">Home</a></li>
+            <li><a href="neighbors">Neighbors</a></li>
+            <li><a href="locations">Locations</a></li>
+            <li><a href="communities">Communities</a></li>
+            <li><a href="visits">Visits</a></li>
+            <li><a href="certifications">Certifications</a></li>
+            <li><a href="visit_types">Visit Types</a></li>
+            <li><a href="certify_neighbors">Certify Neighbors</a></li>
+            <li><a href="community_neighbors">Community Neighbors</a></li>
+            <li><a href="about">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div id="browse">
+        <p>On this page, you can add or remove neighbors from communities. When you create a neighbor, they are not actually added to a community, and they cannot make requests or fulfill requests until they are part of one. It's also important to note that neighbors can be a part of multiple communities at once.</p>
+        <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+        <table border="1" cellpadding="5">
+            <tr>
+                <th><a href="#" onClick="newNeighborCommunity()">New</a></th>
+                <th></th>
+                <th>community</th>
+                <th>neighbor</th>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCommunity('this.neighborCommunity')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCommunity('this.neighborCommunity')">Delete</a></td>
+                <td >North Bay Hills</td>
+                <td >Zaina Hopkins</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCommunity('this.neighborCommunity')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCommunity('this.neighborCommunity')">Delete</a></td>
+                <td >North Bay Hills</td>
+                <td >Lorna McClain</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCommunity('this.neighborCommunity')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCommunity('this.neighborCommunity')">Delete</a></td>
+                <td >North Bay Hills</td>
+                <td >Mikolaj Frye</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCommunity('this.neighborCommunity')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCommunity('this.neighborCommunity')">Delete</a></td>
+                <td >North Bay Hills</td>
+                <td >Aliza Moran</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCommunity('this.neighborCommunity')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCommunity('this.neighborCommunity')">Delete</a></td>
+                <td >Vista Apartments</td>
+                <td >Aliza Moran</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCommunity('this.neighborCommunity')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCommunity('this.neighborCommunity')">Delete</a></td>
+                <td >Vista Apartments</td>
+                <td >Kyron Lewis</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCommunity('this.neighborCommunity')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCommunity('this.neighborCommunity')">Delete</a></td>
+                <td >Vista Apartments</td>
+                <td >Maksymilian Davila</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCommunity('this.neighborCommunity')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCommunity('this.neighborCommunity')">Delete</a></td>
+                <td >Vista Apartments</td>
+                <td >Lowri Dillon</td>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCommunity('this.neighborCommunity')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCommunity('this.neighborCommunity')">Delete</a></td>
+                <td >Vista Apartments</td>
+                <td >Beau Mckee</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCommunity('this.neighborCommunity')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCommunity('this.neighborCommunity')">Delete</a></td>
+                <td >Gooseberry Collective</td>
+                <td >Beau Mckee</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCommunity('this.neighborCommunity')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCommunity('this.neighborCommunity')">Delete</a></td>
+                <td >Gooseberry Collective</td>
+                <td >Jac Shepherd</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCommunity('this.neighborCommunity')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCommunity('this.neighborCommunity')">Delete</a></td>
+                <td >Gooseberry Collective</td>
+                <td >Krishan Newman</td>
+            </tr>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCommunity('this.neighborCommunity')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCommunity('this.neighborCommunity')">Delete</a></td>
+                <td >North</td>
+                <td >Krishan Newman</td>
+            </tr>
+        </table>
+        <p>&nbsp;</p>
+    </div> <!-- browse -->
+    <div id="insert">
+        <form method="POST" id="addNeighborCommunity">
+            <fieldset class="fields">
+                <legend><strong>Add Community to Neighbor</strong></legend>
+                <label for="neighbor"> Neighbor </label>
+                <select id="neighbor" name="neighbor">
+                    <option value="0">&nbsp;</option>
+                    <option value="1">Zaina Hopkins</option>
+                    <option value="2">Lorna McClain</option>
+                    <option value="3">Mikolaj Frye</option>
+                    <option value="4">Aliza Moran</option>
+                    <option value="5">Kyron Lewis</option>
+                    <option value="6">Maksymillian Davila</option>
+                    <option value="7">Lowri Dillon</option>
+                    <option value="8">Beau Mckee</option>
+                    <option value="9">Jac Shepherd</option>
+                    <option value="10">Krishan Newman</option>
+                </select>
+                <label for="community"> Community </label>
+                <select id="community" name="community">
+                    <option value="0">&nbsp;</option>
+                    <option value="1">North Bay Hills</option>
+                    <option value="2">Vista Apartments</option>
+                    <option value="3">Gooseberry Collective</option>
+                </select>
+            </fieldset>
+            <input class="btn" type="submit" id="addNeighborCommunityBtn" value="Join Neighbor To Community">
+            <input class="btn" type="button" value="cancel" onClick="browseCommunities()">
+        </form>
+    </div><!-- insert -->
+    <p>&nbsp;</p>
+    <div id="update">
+        <form method="POST" id="updateNeighborCommunity">
+            <fieldset class="fields">
+                <legend><strong>Update Neighbor Community</strong></legend>
+                <input type="hidden" name="neighborCommunity" id="updateNeighborCommunityID" value="1">
+                <label for="neighborUpdate"> Neighbor </label>
+                <select id="neighborUpdate" name="neighborUpdate">
+                    <option value="1" selected>Zaina Hopkins</option>
+                    <option value="2">Lorna McClain</option>
+                    <option value="3">Mikolaj Frye</option>
+                    <option value="4">Aliza Moran</option>
+                    <option value="5">Kyron Lewis</option>
+                    <option value="6">Maksymillian Davila</option>
+                    <option value="7">Lowri Dillon</option>
+                    <option value="8">Beau Mckee</option>
+                    <option value="9">Jac Shepherd</option>
+                    <option value="10">Krishan Newman</option>
+                </select>
+                <label for="communityUpdate"> Community </label>
+                <select id="communityUpdate" name="communityUpdate">
+                    <option value="1" selected>North Bay Hills</option>
+                    <option value="2">Vista Apartments</option>
+                    <option value="3">Gooseberry Collective</option>
+                </select>
+            </fieldset>
+            <input class="btn" type="submit" id="UpdateSaveNeighborCommunity" value="Save Neighbor To Community">
+            <input class="btn" type="button" value="cancel" onClick="browseCommunities()">
+        </form>
+    </div><!-- update -->
+    <p>&nbsp;</p>
+    <div id="delete" style="display: block">
+        <form method="POST" id="deleteNeighborCommunity">
+            <fieldset class="fields">
+                <legend><strong>Delete Neighbor Community</strong></legend>
+                <p>Are you sure you wish to delete the following neighbor from this community?</p>
+                <input type="hidden" name="neighborCommunity" id="deleteNeighborCommunityID" value="1">
+                <label> <strong>Neighbor </strong> </label> Zaina Hopkins
+                <label> <strong>Community Name</strong> </label> North Bay Hills
+
+            </fieldset>
+            <input class="btn" type="submit" id="DeleteNeighborCommunityBtn" value="Delete From Community">
+            <input class="btn" type="button" value="cancel" onClick="browseCommunities()">
+        </form>
+    </div><!-- delete -->
+</main>
+
+<footer>
+    <p>Made by Chris Blum and Sara Nettle 2024</p>
+</footer>
+
+</body>

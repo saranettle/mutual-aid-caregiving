@@ -1,0 +1,215 @@
+<!DOCTYPE html>
+<html lang="en">
+<!--
+ Original UI design
+ credit Prof. Danielle Safonte
+ bsg_html_UI.zip
+ https://canvas.oregonstate.edu/courses/1967354/assignments/9690212?module_item_id=24460842
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Certify Neighbors</title>
+    <link rel="stylesheet" href="./static/css/main.css">
+    <script language="JavaScript">
+        function showform(dowhat) {
+            /*
+            * four DIVS: browse, insert, update, delete
+            * this function sets one visible the others not
+            */
+            if (dowhat == 'insert'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'update'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'none';
+            }
+            else if (dowhat == 'delete'){
+                document.getElementById('browse').style.display = 'none';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'block';
+            }
+            else if (dowhat == 'all'){
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'block';
+                document.getElementById('update').style.display = 'block';
+                document.getElementById('delete').style.display = 'block';
+            }
+            else { //by default display browse
+                document.getElementById('browse').style.display = 'block';
+                document.getElementById('insert').style.display = 'none';
+                document.getElementById('update').style.display = 'none';
+                document.getElementById('delete').style.display = 'none';
+            }
+        }
+        function newNeighborCertification() { showform('insert'); }
+        function updateNeighborCertification(pid) { showform('update'); }
+        function deleteNeighborCertification(pid) { showform ('delete'); }
+        function browseNeighborCertifications() { showform ('browse'); }
+        function showAll() { showform ('all'); }
+    </script>
+</head>
+
+<body onload="browseNeighborCertifications()">
+<header>
+    <h1>Mutual Aid Caregiving</h1>
+    <h2>Certify Neighbors</h2>
+    <nav>
+        <ul>
+            <li><a href="index">Home</a></li>
+            <li><a href="neighbors">Neighbors</a></li>
+            <li><a href="locations">Locations</a></li>
+            <li><a href="communities">Communities</a></li>
+            <li><a href="visits">Visits</a></li>
+            <li><a href="certifications">Certifications</a></li>
+            <li><a href="visit_types">Visit Types</a></li>
+            <li><a href="certify_neighbors">Certify Neighbors</a></li>
+            <li><a href="community_neighbors">Community Neighbors</a></li>
+            <li><a href="about">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div id="browse">
+        <p>On this page, you can give neighbors a certification, or you can remove the certification. This information allows for neighbors to self-report whether they qualify to do certain tasks for their fellow community members.</p>
+        <p><a href="#" onClick="showAll()">Display all forms</a> </p>
+        <table border="1" cellpadding="5">
+            <tr>
+                <th><a href="#" onClick="newNeighborCertification()">New</a></th>
+                <th></th>
+                <th>neighbor</th>
+                <th>certification</th>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCertification('this.neighborCertification')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCertification('this.neighborCertification')">Delete</a></td>
+                <td >Lorna McClain</td>
+                <td >CPR Certified</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCertification('this.neighborCertification')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCertification('this.neighborCertification')">Delete</a></td>
+                <td >Mikolaj Frye</td>
+                <td >CPR Certified</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCertification('this.neighborCertification')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCertification('this.neighborCertification')">Delete</a></td>
+                <td >Mikolaj Frye</td>
+                <td >First Aid Certified</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCertification('this.neighborCertification')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCertification('this.neighborCertification')">Delete</a></td>
+                <td >Mksymilian Davila</td>
+                <td >CPR Certified</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCertification('this.neighborCertification')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCertification('this.neighborCertification')">Delete</a></td>
+                <td >Jac Shepherd</td>
+                <td >CPR Certified</td>
+            </tr>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCertification('this.neighborCertification')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCertification('this.neighborCertification')">Delete</a></td>
+                <td >Jac Shepherd</td>
+                <td >n6</td>
+            <tr>
+                <td><a href="#" onClick="updateNeighborCertification('this.neighborCertification')">Edit</a></td>
+                <td><a href="#" onclick="deleteNeighborCertification('this.neighborCertification')">Delete</a></td>
+                <td >North</td>
+                <td >Krishan Newman</td>
+            </tr>
+        </table>
+        <p>&nbsp;</p>
+    </div> <!-- browse -->
+    <div id="insert">
+        <form method="POST" id="addNeighborCertification">
+            <fieldset class="fields">
+                <legend><strong>Add Certification to Neighbor</strong></legend>
+                <label for="neighbor"> Neighbor </label>
+                <select id="neighbor" name="neighbor">
+                    <option value="0">&nbsp;</option>
+                    <option value="1">Zaina Hopkins</option>
+                    <option value="2">Lorna McClain</option>
+                    <option value="3">Mikolaj Frye</option>
+                    <option value="4">Aliza Moran</option>
+                    <option value="5">Kyron Lewis</option>
+                    <option value="6">Maksymillian Davila</option>
+                    <option value="7">Lowri Dillon</option>
+                    <option value="8">Beau Mckee</option>
+                    <option value="9">Jac Shepherd</option>
+                    <option value="10">Krishan Newman</option>
+                </select>
+                <label for="certification"> Certification </label>
+                <select id="certification" name="certification">
+                    <option value="0">&nbsp;</option>
+                    <option value="1">CPR Certified</option>
+                    <option value="2">First Aid Certification</option>
+                    <option value="3">n6</option>
+                </select>
+            </fieldset>
+            <input class="btn" type="submit" id="addNeighborCertificationBtn" name="addNeighborCertificationBtn" value="Certify Neighbor">
+            <input class="btn" type="button" value="cancel" onClick="browseNeighborCertifications()">
+        </form>
+    </div><!-- insert -->
+    <p>&nbsp;</p>
+    <div id="update">
+        <form method="POST" id="updateNeighborCertification">
+            <fieldset class="fields">
+                <legend><strong>Update Neighbor Certification</strong></legend>
+                <input type="hidden" name="neighborCertification" id="updateNeighborCertificationID" value="1">
+                <label for="neighborUpdate"> Neighbor </label>
+                <select id="neighborUpdate" name="neighborUpdate">
+                    <option value="1">Zaina Hopkins</option>
+                    <option value="2" selected>Lorna McClain</option>
+                    <option value="3">Mikolaj Frye</option>
+                    <option value="4">Aliza Moran</option>
+                    <option value="5">Kyron Lewis</option>
+                    <option value="6">Maksymillian Davila</option>
+                    <option value="7">Lowri Dillon</option>
+                    <option value="8">Beau Mckee</option>
+                    <option value="9">Jac Shepherd</option>
+                    <option value="10">Krishan Newman</option>
+                </select>
+                <label for="certificationUpdate"> Certification </label>
+                <select id="certificationUpdate" name="certificationUpdate">
+                    <option value="1" selected>CPR Certified</option>
+                    <option value="2">First Aid Certification</option>
+                    <option value="3">n6</option>
+                </select>
+            </fieldset>
+            <input class="btn btn-primary" type="submit" id="updateSaveNeighborCertificationBtn" name="updateSaveNeighborCertificationBtn" value="Save Update NeighborCertification">
+            <input class="btn" type="button" value="cancel" onClick="browseNeighborCertifications()">
+        </form>
+    </div><!-- update -->
+    <p>&nbsp;</p>
+    <div id="delete" style="display: block">
+        <form method="POST" id="deleteNeighborCertification">
+            <fieldset class="fields">
+                <legend><strong>Delete Neighbor Certification</strong></legend>
+                <p>Are you sure you wish to delete the following neighbor certification?</p>
+                <input type="hidden" name="neighborCertification" id="deleteNeighborCertificationID" value="1">
+                <label> <strong>Neighbor </strong> </label> Lorna McClain
+                <label> <strong>Certification Name</strong> </label> CPR Certified
+
+            </fieldset>
+            <input class="btn" type="submit" id="deleteNeighborCertificationBtn" name="deleteNeighborCertificationBtn" value="Delete NeighborCertification">
+            <input class="btn" type="button" value="cancel" onClick="browseNeighborCertifications()">
+        </form>
+    </div><!-- delete -->
+</main>
+
+<footer>
+    <p>Made by Chris Blum and Sara Nettle 2024</p>
+</footer>
+
+</body>
