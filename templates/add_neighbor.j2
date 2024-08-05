@@ -1,0 +1,52 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutual Aid Caregiving</title>
+    <link rel="stylesheet" href="./static/css/main.css">
+</head>
+<body>
+
+    <header>
+        <h1>Mutual Aid Caregiving</h1>
+        <nav>
+            <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/neighbors">Neighbors</a></li>
+            <li><a href="/locations">Locations</a></li>
+            <li><a href="/communities">Communities</a></li>
+            <li><a href="/visits">Visits</a></li>
+            <li><a href="/certifications">Certifications</a></li>
+            <li><a href="/visit_types">Visit Types</a></li>
+            <li><a href="/certify_neighbors">Certify Neighbors</a></li>
+            <li><a href="/community_neighbors">Community Neighbors</a></li>
+            <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <main>
+
+            
+            <form id="add_neighbor" action="/add_neighbor" method="post">
+			<legend><Add a Neighbor</legend>
+			<fieldset>
+                <!-- placeholder shows ghost text, required forces an input, pattern forces input adherence -->
+				<label for="make">first name:</label>
+				<input type="text" class="form-control" id="firstName" name="firstName" placeholder="" required>
+
+				<label for="model">last name:</label>
+				<input type="text" class="form-control" id="lastName" name="lastName" placeholder="" required>
+
+				<label for="color">phone number:</label>
+				<input type="text" class="form-control" id="neighborPhone" name="neighborPhone" placeholder=""> 
+            </fieldset>
+
+            <!-- Create 'Add Person' and 'Cancel' buttons -->
+			<input type="submit" value="Add Neighbor" name="add_neighbor">
+            </form>
+
+    </main>
+    </body>
+    </html>
