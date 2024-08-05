@@ -1,0 +1,75 @@
+<html>
+<!--
+ Original UI design
+ credit Prof. Danielle Safonte
+ bsg_people_app
+ https://github.com/osu-cs340-ecampus/flask-starter-app/tree/24f289773ee051ebb8c83822bd78441ccb1dad33/bsg_people_app
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutual Aid Caregiving</title>
+    <link rel="stylesheet" href="../../static/css/main.css">
+</head>
+<body>
+
+    <header>
+        <h1>Mutual Aid Caregiving</h1>
+        <nav>
+            <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/neighbors">Neighbors</a></li>
+            <li><a href="/locations">Locations</a></li>
+            <li><a href="/communities">Communities</a></li>
+            <li><a href="/visits">Visits</a></li>
+            <li><a href="/certifications">Certifications</a></li>
+            <li><a href="/visit_types">Visit Types</a></li>
+            <li><a href="/certify_neighbors">Certify Neighbors</a></li>
+            <li><a href="/community_neighbors">Community Neighbors</a></li>
+            <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main>
+        <div id="edit">
+            <form id="edit_certify_neighbor" method="POST"  action="/edit_certify_neighbors/{{certify_neighbors[0].neighborHasCertificationID}}">
+            <fieldset>
+                <legend><strong>Update Neighbor Certification</strong></legend>
+                <input type="hidden" name="neighborCertification" id="neighborCertification" value="{{certify_neighbors[0].neighborHasCertificationID}}" required>
+                <label for="neighborUpdate"> Neighbor </label>
+                <select id="neighborUpdate" name="neighborUpdate">
+                    {% for neighbor in neighbors %}
+                        <!-- If the value iterated neighbor matches the value of the neighbor of neighbor certification
+                        currently Editing, pre-select that option -->
+                        {% if neighbor['neighborID'] == certify_neighbors[0].neighbor %}
+                            <option value="{{ neighbor['neighborID'] }}" selected> {{neighbor['name']}}</option>
+                        {% else %}
+                            <option value="{{ neighbor['neighborID'] }}"> {{neighbor['name']}}</option>
+                        {% endif %}
+                        <!-- End of this for loop -->
+                    {% endfor %}
+                </select>
+                <label for="certificationUpdate"> Certification </label>
+                <select id="certificationUpdate" name="certificationUpdate">
+                    {% for certification in certifications %}
+                        <!-- If the value iterated certification matches the value of the certification of neighbor certification
+                        currently Editing, pre-select that option -->
+                        {% if certification['certificationID'] == certify_neighbors[0].certification %}
+                            <option value="{{ certification['certificationID'] }}" selected> {{certification['certificationTitle']}}</option>
+                        {% else %}
+                            <option value="{{ certification['certificationID'] }}"> {{certification['certificationTitle']}}</option>
+                        {% endif %}
+                        <!-- End of this for loop -->
+                    {% endfor %}
+                </select>
+            </fieldset>
+                <input class="btn btn-primary" type="submit" name="edit_certify_neighbors" value="Update Neighbor Certification">
+            </form>
+        </div>
+    </main>
+    <footer>
+        <p>Made by Chris Blum and Sara Nettle 2024</p>
+    </footer>
+    </body>
+    </html>

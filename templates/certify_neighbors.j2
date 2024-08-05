@@ -84,50 +84,26 @@
             <tr>
                 <th><a href="#" onClick="newNeighborCertification()">New</a></th>
                 <th></th>
-                <th>neighbor</th>
-                <th>certification</th>
+                <!-- Iterate through each key in the first entry to get the
+                column name -->
+                {% for key in certify_neighbors[0].keys() %}
+
+                    <!-- Create a <th> tag with the key inside of it, this will be
+                    our header row -->
+                    <th>{{ key }}</th>
+
+                    <!-- End of this for loop -->
+                {% endfor %}
             </tr>
-            <tr>
-                <td><a href="#" onClick="updateNeighborCertification('this.neighborCertification')">Edit</a></td>
-                <td><a href="#" onclick="deleteNeighborCertification('this.neighborCertification')">Delete</a></td>
-                <td >Lorna McClain</td>
-                <td >CPR Certified</td>
-            </tr>
-            <tr>
-                <td><a href="#" onClick="updateNeighborCertification('this.neighborCertification')">Edit</a></td>
-                <td><a href="#" onclick="deleteNeighborCertification('this.neighborCertification')">Delete</a></td>
-                <td >Mikolaj Frye</td>
-                <td >CPR Certified</td>
-            </tr>
-            <tr>
-                <td><a href="#" onClick="updateNeighborCertification('this.neighborCertification')">Edit</a></td>
-                <td><a href="#" onclick="deleteNeighborCertification('this.neighborCertification')">Delete</a></td>
-                <td >Mikolaj Frye</td>
-                <td >First Aid Certified</td>
-            </tr>
-            <tr>
-                <td><a href="#" onClick="updateNeighborCertification('this.neighborCertification')">Edit</a></td>
-                <td><a href="#" onclick="deleteNeighborCertification('this.neighborCertification')">Delete</a></td>
-                <td >Mksymilian Davila</td>
-                <td >CPR Certified</td>
-            </tr>
-            <tr>
-                <td><a href="#" onClick="updateNeighborCertification('this.neighborCertification')">Edit</a></td>
-                <td><a href="#" onclick="deleteNeighborCertification('this.neighborCertification')">Delete</a></td>
-                <td >Jac Shepherd</td>
-                <td >CPR Certified</td>
-            </tr>
-            <tr>
-                <td><a href="#" onClick="updateNeighborCertification('this.neighborCertification')">Edit</a></td>
-                <td><a href="#" onclick="deleteNeighborCertification('this.neighborCertification')">Delete</a></td>
-                <td >Jac Shepherd</td>
-                <td >n6</td>
-            <tr>
-                <td><a href="#" onClick="updateNeighborCertification('this.neighborCertification')">Edit</a></td>
-                <td><a href="#" onclick="deleteNeighborCertification('this.neighborCertification')">Delete</a></td>
-                <td >North</td>
-                <td >Krishan Newman</td>
-            </tr>
+            {% for certified_neighbor in certify_neighbors %}
+                <tr>
+                    <td><a href="edit_certify_neighbors/{{certified_neighbor.neighborHasCertificationID}}">Edit</a></td>
+                    <td><a href="delete_certify_neighbors/{{certified_neighbor.neighborHasCertificationID}}">Delete</a></td>
+                    {% for key in certified_neighbor.keys() %}
+                        <td>{{certified_neighbor[key]}}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
         </table>
         <p>&nbsp;</p>
     </div> <!-- browse -->
@@ -138,23 +114,18 @@
                 <label for="neighbor"> Neighbor </label>
                 <select id="neighbor" name="neighbor">
                     <option value="0">&nbsp;</option>
-                    <option value="1">Zaina Hopkins</option>
-                    <option value="2">Lorna McClain</option>
-                    <option value="3">Mikolaj Frye</option>
-                    <option value="4">Aliza Moran</option>
-                    <option value="5">Kyron Lewis</option>
-                    <option value="6">Maksymillian Davila</option>
-                    <option value="7">Lowri Dillon</option>
-                    <option value="8">Beau Mckee</option>
-                    <option value="9">Jac Shepherd</option>
-                    <option value="10">Krishan Newman</option>
+                    {% for neighbor in neighbors %}
+                        <option value="{{ neighbor['neighborID'] }}"> {{neighbor['name']}}</option>
+                        <!-- End of this for loop -->
+                    {% endfor %}
                 </select>
                 <label for="certification"> Certification </label>
                 <select id="certification" name="certification">
                     <option value="0">&nbsp;</option>
-                    <option value="1">CPR Certified</option>
-                    <option value="2">First Aid Certification</option>
-                    <option value="3">n6</option>
+                    {% for certification in certifications %}
+                        <option value="{{ certification['certificationID'] }}"> {{certification['certificationTitle']}}</option>
+                        <!-- End of this for loop -->
+                    {% endfor %}
                 </select>
             </fieldset>
             <input class="btn" type="submit" id="addNeighborCertificationBtn" name="addNeighborCertificationBtn" value="Certify Neighbor">
@@ -162,50 +133,8 @@
         </form>
     </div><!-- insert -->
     <p>&nbsp;</p>
-    <div id="update">
-        <form method="POST" id="updateNeighborCertification">
-            <fieldset class="fields">
-                <legend><strong>Update Neighbor Certification</strong></legend>
-                <input type="hidden" name="neighborCertification" id="updateNeighborCertificationID" value="1">
-                <label for="neighborUpdate"> Neighbor </label>
-                <select id="neighborUpdate" name="neighborUpdate">
-                    <option value="1">Zaina Hopkins</option>
-                    <option value="2" selected>Lorna McClain</option>
-                    <option value="3">Mikolaj Frye</option>
-                    <option value="4">Aliza Moran</option>
-                    <option value="5">Kyron Lewis</option>
-                    <option value="6">Maksymillian Davila</option>
-                    <option value="7">Lowri Dillon</option>
-                    <option value="8">Beau Mckee</option>
-                    <option value="9">Jac Shepherd</option>
-                    <option value="10">Krishan Newman</option>
-                </select>
-                <label for="certificationUpdate"> Certification </label>
-                <select id="certificationUpdate" name="certificationUpdate">
-                    <option value="1" selected>CPR Certified</option>
-                    <option value="2">First Aid Certification</option>
-                    <option value="3">n6</option>
-                </select>
-            </fieldset>
-            <input class="btn btn-primary" type="submit" id="updateSaveNeighborCertificationBtn" name="updateSaveNeighborCertificationBtn" value="Save Update NeighborCertification">
-            <input class="btn" type="button" value="cancel" onClick="browseNeighborCertifications()">
-        </form>
-    </div><!-- update -->
-    <p>&nbsp;</p>
-    <div id="delete" style="display: block">
-        <form method="POST" id="deleteNeighborCertification">
-            <fieldset class="fields">
-                <legend><strong>Delete Neighbor Certification</strong></legend>
-                <p>Are you sure you wish to delete the following neighbor certification?</p>
-                <input type="hidden" name="neighborCertification" id="deleteNeighborCertificationID" value="1">
-                <label> <strong>Neighbor </strong> </label> Lorna McClain
-                <label> <strong>Certification Name</strong> </label> CPR Certified
 
-            </fieldset>
-            <input class="btn" type="submit" id="deleteNeighborCertificationBtn" name="deleteNeighborCertificationBtn" value="Delete NeighborCertification">
-            <input class="btn" type="button" value="cancel" onClick="browseNeighborCertifications()">
-        </form>
-    </div><!-- delete -->
+    <p>&nbsp;</p>
 </main>
 
 <footer>
