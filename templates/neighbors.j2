@@ -2,8 +2,8 @@
 <!--
  Original UI design
  credit Prof. Danielle Safonte
- bsg_html_UI.zip
- https://canvas.oregonstate.edu/courses/1967354/assignments/9690212?module_item_id=24460842
+ bsg_people_app
+ https://github.com/osu-cs340-ecampus/flask-starter-app/tree/24f289773ee051ebb8c83822bd78441ccb1dad33/bsg_people_app
 -->
     <head>
         <meta charset="UTF-8">
@@ -39,35 +39,28 @@
             <p>Add a neighbor <a href="/add_neighbor">here.</a></p>
 
         <table>
-            <!-- Access data tuple passed from app.py --> 
             {% if data %}
 			    <thead>
 				    <tr>
-					    <!-- Iterate through each key in the first entry to get the column name -->
                         {% for key in data[0].keys() %}
 					    
-                        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
 					    <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
 					
-                        <!-- End of this for loop -->
                         {% endfor %} 
                         <th scope="col" data-filter-control="input"></th>
                         <th scope="col" data-filter-control="input"></th>
                     </tr>
 
 				<tbody>
-					<!-- Now, iterate through every item in data -->{% for item in data %}
 					    <tr>
-						    <!-- Then iterate through every key in the current item dictionary -->
                             {% for key in item.keys() %}
 
-						    <!-- Create a <td> element with the value of that key in it -->
-						    <td> {{item[key]}} </td> 
+						    <td> {{item[key]}}</td> 
                             {% endfor %}
 
-                            <!-- Create our edit/delete buttons -->
-						    <td><a href="edit_neighbor/{{item.id}}" class="btn btn-default">Edit</a></td>
-						    <td><a href="delete_neighbor/{{item.id}}" class="btn btn-default">Delete</a></td>
+                            
+						    <td><a href="edit_neighbor/{{item.neighborID}}" class="btn btn-default">Edit</a></td>
+						    <td><a href="delete_neighbor/{{item.neighborID}}" class="btn btn-default">Delete</a></td>
 
 					    </tr> 
                         {% endfor %} 

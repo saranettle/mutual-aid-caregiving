@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mutual Aid Caregiving</title>
-    <link rel="stylesheet" href="./static/css/main.css">
+    <link rel="stylesheet" href="../../static/css/main.css">
 </head>
 <body>
 
@@ -34,22 +34,23 @@
 
     <main>
 
-            
-            <form id="add_neighbor" action="/add_neighbor" method="post">
+            <form id="edit_neighbor" action="/edit_neighbor/{{data[0].neighborID}}" method="post">
 			<legend><Add a Neighbor</legend>
 			<fieldset>
 
-				<label for="make">first name:</label>
-				<input type="text" class="form-control" id="firstName" name="firstName" placeholder="" required>
+                <input type="hidden" value="{{data[0].neighborID}}" class="form-control" id="neighborID" name="neighborID" required>
 
-				<label for="model">last name:</label>
-				<input type="text" class="form-control" id="lastName" name="lastName" placeholder="" required>
+				<label for="make">First Name</label>
+				<input type="text" class="form-control" id="firstName" name="firstName" value="{{data[0].firstName}}" required>
 
-				<label for="color">phone number:</label>
-				<input type="text" class="form-control" id="neighborPhone" name="neighborPhone" placeholder=""> 
+				<label for="model">Last name:</label>
+				<input type="text" class="form-control" id="lastName" name="lastName" value="{{data[0].lastName}}" required>
+
+				<label for="color">Phone number:</label>
+				<input type="text" class="form-control" id="neighborPhone" name="neighborPhone" value="{{data[0].neighborPhone}}"> 
             </fieldset>
 
-			<input type="submit" value="Add Neighbor" name="add_neighbor">
+			<input type="submit" value="Edit Neighbor" name="edit_neighbor">
             </form>
 
     </main>
