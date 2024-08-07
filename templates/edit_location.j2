@@ -1,0 +1,71 @@
+<html>
+<!--
+ Original UI design
+ credit Prof. Danielle Safonte
+ bsg_people_app
+ https://github.com/osu-cs340-ecampus/flask-starter-app/tree/24f289773ee051ebb8c83822bd78441ccb1dad33/bsg_people_app
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutual Aid Caregiving</title>
+    <link rel="stylesheet" href="../../static/css/main.css">
+</head>
+<body>
+
+<header>
+    <h1>Mutual Aid Caregiving</h1>
+    <nav>
+        <ul>
+            <li><a href="/index">Home</a></li>
+            <li><a href="/neighbors">Neighbors</a></li>
+            <li><a href="/locations">Locations</a></li>
+            <li><a href="/communities">Communities</a></li>
+            <li><a href="/visits">Visits</a></li>
+            <li><a href="/certifications">Certifications</a></li>
+            <li><a href="/visit_types">Visit Types</a></li>
+            <li><a href="/certify_neighbors">Certify Neighbors</a></li>
+            <li><a href="/community_neighbors">Community Neighbors</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </nav>
+</header>
+
+<main>
+    <div id="update">
+        <form method="POST" id="updateLocations">
+            <fieldset class="fields">
+                <input type="hidden" name="locationID" id="locationID" value="{{data[0].locationID}}">
+                <legend><strong>Update Location</strong></legend>
+                <label> Name </label><input type="text" name="locationName" value="{{data[0].locationName}}">
+                <label> Address 1 </label> <input type="text" name="address1" value="{{data[0].address1}}">
+                <label> Address 2 </label> <input type="text" name="address2" value="{{data[0].address2}}">
+                <label> City  </label><input type="text" name="locationCity" value="{{data[0].locationCity}}">
+                <label> State </label> <input type="text" name="locationState" value="{{data[0].locationState}}">
+                <label> Zip Code  </label><input type="text" name="locationZip" value="{{data[0].locationZip}}">
+                <label for="communityUpdate"> Community </label>
+                <select id="communityID" name="communityID">
+                <!-- If the value iterated community matches the value of the community of location
+                     currently Editing, pre-select that option -->
+                    {% for community in community_data %}
+                        {% if community['communityID'] == data[0].community %}
+                            <option value="{{ community['communityID'] }}" selected> {{ community['communityName'] }}</option>
+                        {% else %}
+                            <option value="{{ community['communityID'] }}"> {{ community['communityName'] }}</option>
+                        {% endif %}
+                    {% endfor %}
+                <!-- End of this for loop -->
+                </select>
+
+            </fieldset>
+            <input class="btn" type="submit" id="UpdateSaveLocations" value="Save Update Location">
+            <!-- Cancel button behavior based on https://stackoverflow.com/questions/503093/how-do-i-redirect-to-another-webpage -->
+            <input class="btn" type="button" value="cancel" onClick=window.location.href="/locations";>
+        </form>
+    </div><!-- update -->
+</main>
+<footer>
+    <p>Made by Chris Blum and Sara Nettle 2024</p>
+</footer>
+</body>
+</html>

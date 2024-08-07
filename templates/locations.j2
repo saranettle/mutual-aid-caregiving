@@ -48,15 +48,15 @@
                 document.getElementById('delete').style.display = 'none';
             }
         }
-        function newCertifications() { showform('insert'); }
-        function updateCertifications(pid) { showform('update'); }
-        function deleteCertifications(pid) { showform ('delete'); }
-        function browseCertifications() { showform ('browse'); }
+        function newLocations() { showform('insert'); }
+        function updateLocations(pid) { showform('update'); }
+        function deleteLocations(pid) { showform ('delete'); }
+        function browseLocations() { showform ('browse'); }
         function showAll() { showform ('all'); }
     </script>
 </head>
 
-<body onload="browseCertifications()">
+<body onload="browseLocations()">
 <header>
     <h1>Mutual Aid Caregiving</h1>
     <h2>Locations</h2>
@@ -78,15 +78,15 @@
 
 <main>
     <div id="browse">
-         <p>On this page, you can add, delete, or edit a location. Locations are used to represent the places where visits may take place, are are set by the neighbor who makes the request. They are typically only accessible to neighbors who share a community.</p>
+        <p>On this page, you can add, delete, or edit a location. Locations are used to represent the places where visits may take place, are are set by the neighbor who makes the request. They are typically only accessible to neighbors who share a community.</p>
         <p><a href="#" onClick="showAll()">Display all forms</a> </p>
         <table border="1" cellpadding="5">
             <tr>
-                <th><a href="#" onClick="newCertifications()">New</a></th>
+                <th><a href="#" onClick="newLocations()">New</a></th>
                 <th></th>
                 <!-- Iterate through each key in the first entry to get the
                 column name -->
-                {% for key in locations[0].keys() %}
+                {% for key in data[0].keys() %}
 
                     <!-- Create a <th> tag with the key inside of it, this will be
                     our header row -->
@@ -95,71 +95,40 @@
                     <!-- End of this for loop -->
                 {% endfor %}
             </tr>
-            {% for certification in locations %}
-            <tr>
-                <td><a href="#" onClick="updateCertifications('this.certificationID')">Edit</a></td>
-                <td><a href="#" onclick="deleteCertifications('this.certificationID')">Delete</a></td>
-                {% for key in certification.keys() %}
-                <td>{{certification[key]}}</td>
-                {% endfor %}
-            </tr>
+            {% for location in data %}
+                <tr>
+                    <td><a href="edit_location/{{location.locationID}}">Edit</a></td>
+                    <td><a href="delete_location/{{location.locationID}}">Delete</a></td>
+                    {% for key in location.keys() %}
+                        <td>{{location[key]}}</td>
+                    {% endfor %}
+                </tr>
             {% endfor %}
         </table>
         <p>&nbsp;</p>
     </div> <!-- browse -->
     <div id="insert">
-        <form method="POST" id="addCertifications">
-            <legend><strong>Add Certification</strong></legend>
+        <form method="POST" id="addLocations">
             <fieldset class="fields">
-                <label> Certification Title </label> <input type="text" name="certificationTitle">
-            </fieldset>
-            <input class="btn" type="submit" id="addCertificationsBtn" value="Add Certification">
-            <input class="btn" type="button" value="cancel" onClick="browseCertifications()">
-        </form>
-    </div><!-- insert -->
-   <p>&nbsp;</p>
-    <div id="update">
-        <form method="POST" id="updateLocations">
-            <fieldset class="fields">
-                <legend><strong>Update Location</strong></legend>
-                <label> Name </label> <input type="text" name="locationNameUpdate" value="Lorna's House">
-                <label> Address 1 </label> <input type="text" name="address1Update" value="42 NW 4th Ave">
-                <label> Address 2 </label> <input type="text" name="address2Update">
-                <label> City </label> <input type="text" name="locationCityUpdate" value="Friendly City">
-                <label> State </label> <input type="text" name="locationStateUpdate" value="GA">
-                <label> Zip Code </label> <input type="text" name="locationZipUpdate" value="30002">
-                <label for="communityUpdate"> Community </label>
-                <select id="communityUpdate" name="communityUpdate">
-                    <option value="0">&nbsp;</option>
-                    <option value="1" selected>North Bay Hills</option>
-                    <option value="2">Vista Apartments</option>
-                    <option value="3">Gooseberry Collective</option>
+                <legend><strong>Add Location</strong></legend>
+                <label> Name </label> <input type="text" name="locationName">
+                <label> Address 1 </label> <input type="text" name="address1">
+                <label> Address 2 </label> <input type="text" name="address2">
+                <label> City </label> <input type="text" name="locationCity">
+                <label> State </label> <input type="text" name="locationState">
+                <label> Zip Code </label> <input type="text" name="locationZip">
+                <label for="communityInsert"> Community </label>
+                <select id="communityID" name="communityID">
+                    {% for community in community_data %}
+                        <option value="{{ community['communityID'] }}"> {{community['communityName']}}</option>
+                        <!-- End of this for loop -->
+                    {% endfor %}
                 </select>
             </fieldset>
-            <input class="btn" type="submit" id="UpdateSaveLocations" value="Save Update Location">
+            <input class="btn" type="submit" id="addLocationsBtn" value="Add Location">
             <input class="btn" type="button" value="cancel" onClick="browseLocations()">
         </form>
-    </div><!-- update -->
-    <p>&nbsp;</p>
-    <div id="delete" style="display: block">
-        <form method="POST" id="deleteLocations">
-            <fieldset class="fields">
-                <legend><strong>Delete Location</strong></legend>
-                <p>Are you sure you wish to delete the following?</p>
-                <input type="hidden" name="locationID" id="deleteLocationsID" value="1">
-                <label><strong>ID:</strong></label> 1
-                <label> <strong> Name </strong> </label> Lorna's House
-                <label> <strong> Address 1 </strong> </label> 42 NW 4th Ave
-                <label> <strong> Address 2 </strong> </label> NULL
-                <label> <strong> City </strong> </label> Friendly City
-                <label> <strong> State </strong> </label> GA
-                <label> <strong>  Zip Code </strong> </label> 30002
-                <label> <strong> Community </strong> </label> North Bay Hills
-            </fieldset>
-            <input class="btn" type="submit" id="DeleteLocationsBtn" value="Delete Location">
-            <input class="btn" type="button" value="cancel" onClick="browseLocations()">
-        </form>
-    </div><!-- delete -->
+    </div><!-- insert -->
 </main>
 
 <footer>
