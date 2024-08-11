@@ -8,13 +8,11 @@ from flask_mysqldb import MySQL
 from flask import request
 import os
 
-
 app = Flask(__name__)
-
 
 app.config['MYSQL_HOST'] = 'classmysql.engr.oregonstate.edu'
 app.config['MYSQL_USER'] = 'cs340_blumch'
-app.config['MYSQL_PASSWORD'] = 'rxVlhZmxgVhD' #last 4 of onid
+app.config['MYSQL_PASSWORD'] = 'rxVlhZmxgVhD'  # last 4 of onid
 app.config['MYSQL_DB'] = 'cs340_blumch'
 app.config['MYSQL_CURSORCLASS'] = "DictCursor"
 
@@ -29,6 +27,7 @@ mysql = MySQL(app)
 def root():
     return render_template("main.j2")
 
+
 @app.route('/visits')
 def visits():
     return render_template("visits.j2")
@@ -41,7 +40,6 @@ def visit_types():
 
 @app.route('/neighbors', methods=["GET"])
 def neighbors():
-
     if request.method == "GET":
         query = "SELECT neighborID, firstName, lastName, neighborPhone FROM Neighbors ORDER BY neighborID"
         cur = mysql.connection.cursor()
@@ -53,27 +51,24 @@ def neighbors():
 
 @app.route('/add_neighbor', methods=["GET", "POST"])
 def add_neighbor():
-
     if request.method == "POST":
 
         if request.form.get("add_neighbor"):
-        
             firstName = request.form["firstName"]
             lastName = request.form["lastName"]
             neighborPhone = request.form["neighborPhone"]
-            
+
             query = "INSERT INTO Neighbors (firstName, lastName, neighborPhone) VALUES (%s, %s, %s)"
             cur = mysql.connection.cursor()
             cur.execute(query, (firstName, lastName, neighborPhone))
             mysql.connection.commit()
             return redirect("/neighbors")
-        
+
     return render_template("add_neighbor.j2")
 
 
 @app.route("/delete_neighbor/<int:neighborID>")
 def delete_neighbor(neighborID):
-
     query = "DELETE FROM Neighbors WHERE NeighborID = '%s';"
     cur = mysql.connection.cursor()
     cur.execute(query, (neighborID,))
@@ -84,7 +79,6 @@ def delete_neighbor(neighborID):
 
 @app.route("/edit_neighbor/<int:neighborID>", methods=["POST", "GET"])
 def edit_neighbor(neighborID):
-
     if request.method == "GET":
         query = "SELECT * FROM Neighbors WHERE neighborID = %s" % (neighborID)
         cur = mysql.connection.cursor()
@@ -92,7 +86,7 @@ def edit_neighbor(neighborID):
         data = cur.fetchall()
 
         return render_template("edit_neighbor.j2", data=data)
-    
+
     if request.method == "POST":
 
         # for editing the neighbor
@@ -300,10 +294,11 @@ def edit_certification(certificationID):
 def certify_neighbors():
     # grab all possible certifications
     if request.method == "GET":
-        query = ("SELECT neighborHasCertificationID, CONCAT(firstName,' ',lastName) AS neighbor, certificationTitle AS certification "
-                 "FROM Neighbors INNER JOIN NeighborHasCertifications "
-                 "ON neighborID = neighbor INNER JOIN Certifications ON certificationID = certification "
-                 "ORDER BY neighbor, certificationTitle;")
+        query = (
+            "SELECT neighborHasCertificationID, CONCAT(firstName,' ',lastName) AS neighbor, certificationTitle AS certification "
+            "FROM Neighbors INNER JOIN NeighborHasCertifications "
+            "ON neighborID = neighbor INNER JOIN Certifications ON certificationID = certification "
+            "ORDER BY neighbor, certificationTitle;")
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
@@ -338,7 +333,8 @@ def certify_neighbors():
 @app.route('/edit_certify_neighbors/<int:neighborHasCertificationID>', methods=["POST", "GET"])
 def edit_certify_neighbors(neighborHasCertificationID):
     if request.method == "GET":
-        query = "SELECT * FROM NeighborHasCertifications WHERE neighborHasCertificationID = %s" % (neighborHasCertificationID)
+        query = "SELECT * FROM NeighborHasCertifications WHERE neighborHasCertificationID = %s" % (
+            neighborHasCertificationID)
         cur = mysql.connection.cursor()
         cur.execute(query)
         data = cur.fetchall()
@@ -385,9 +381,9 @@ def community_neighbors():
     # grab all community neighbor relationships
     if request.method == "GET":
         query = ("SELECT "
-                    "communityHasNeighborID, "
-                    "communityName AS community, "
-                    "CONCAT(firstName,' ',lastName) AS neighbor "
+                 "communityHasNeighborID, "
+                 "communityName AS community, "
+                 "CONCAT(firstName,' ',lastName) AS neighbor "
                  "FROM CommunityHasNeighbors "
                  "INNER JOIN Neighbors ON neighborID = neighbor "
                  "INNER JOIN Communities ON community = communityID "
@@ -477,4 +473,3 @@ def about():
 if __name__ == "__main__":
     # Start the app on port 3000, it will be different once hosted
     app.run(port=3000, debug=True)
-
