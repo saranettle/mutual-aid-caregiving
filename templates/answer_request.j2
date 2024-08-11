@@ -1,0 +1,78 @@
+<html>
+<!--
+ Original UI design
+ credit Prof. Danielle Safonte
+ bsg_people_app
+ https://github.com/osu-cs340-ecampus/flask-starter-app/tree/24f289773ee051ebb8c83822bd78441ccb1dad33/bsg_people_app
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutual Aid Caregiving</title>
+    <link rel="stylesheet" href="../../static/css/main.css">
+</head>
+<body>
+
+    <header>
+        <h1>Mutual Aid Caregiving</h1>
+        <nav>
+            <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/neighbors">Neighbors</a></li>
+            <li><a href="/locations">Locations</a></li>
+            <li><a href="/communities">Communities</a></li>
+            <li><a href="/visits">Visits</a></li>
+            <li><a href="/certifications">Certifications</a></li>
+            <li><a href="/visit_types">Visit Types</a></li>
+            <li><a href="/certify_neighbors">Certify Neighbors</a></li>
+            <li><a href="/community_neighbors">Community Neighbors</a></li>
+            <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <main>
+
+            <h3>Visit Details</h3>
+            <ul>
+                <li>Name: {{ data[0].Neighbor }}</li>
+                <li>Location: {{ data[0].Location }}</li>
+                <li>Start time of the visit: {{ data[0].Time }}</li>
+                <li>Duration: {{ data[0].Hours }}</li>
+                <li>Category of visit: {{ data[0].Category }}</li>
+                <li>Notes: {{ data[0].Notes }}</li>
+            </ul>
+            
+            <form id="answer_request" action="/answer_request/{{ data[0].visitID }}" method="post">
+			<legend>Answer this request for a visit!</legend>
+			<fieldset>
+
+        
+
+				<label for="neighborName">Choose your name</label>
+                <select id="neighborName" name="neighborName">
+                    <option value="0">&nbsp;</option>
+
+                    {% for neighbor in neighbors %}
+                        <option value="{{ neighbor.neighborID }}"> {{neighbor.neighborName}}</option>
+                        <!-- End of this for loop -->
+                    {% endfor %}
+                </select>
+
+                <input type="hidden" id="fulfilled" name="fulfilled" value="1" />
+                <input type="hidden" id="visitID" name="visitID" value="{{ data[0].visitID }}" />
+
+                
+				
+            </fieldset>
+
+			<input type="submit" value="Answer Request" name="answer_request">
+            </form>
+
+    </main>
+    <footer>
+        <p>Made by Chris Blum and Sara Nettle 2024</p>
+    </footer>
+    </body>
+    </html>

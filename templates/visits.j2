@@ -10,52 +10,10 @@
         <meta name="viewport" content="width=device-width, initial-scale=1.0">
         <title>Visits</title>
         <link rel="stylesheet" href="./static/css/main.css">
-        <script language="JavaScript">
-            function showform(dowhat) {
-                /*
-                * four DIVS: browse, insert, update, delete
-                * this function sets one visible the others not
-                */
-                if (dowhat == 'insert'){
-                    document.getElementById('browse').style.display = 'none';
-                    document.getElementById('insert').style.display = 'block';
-                    document.getElementById('update').style.display = 'none';
-                    document.getElementById('delete').style.display = 'none';
-                }
-                else if (dowhat == 'update'){
-                    document.getElementById('browse').style.display = 'none';
-                    document.getElementById('insert').style.display = 'none';
-                    document.getElementById('update').style.display = 'block';
-                    document.getElementById('delete').style.display = 'none';
-                }
-                else if (dowhat == 'delete'){
-                    document.getElementById('browse').style.display = 'none';
-                    document.getElementById('insert').style.display = 'none';
-                    document.getElementById('update').style.display = 'none';
-                    document.getElementById('delete').style.display = 'block';
-                }
-                else if (dowhat == 'all'){
-                    document.getElementById('browse').style.display = 'block';
-                    document.getElementById('insert').style.display = 'block';
-                    document.getElementById('update').style.display = 'block';
-                    document.getElementById('delete').style.display = 'block';
-                }
-                else { //by default display browse
-                    document.getElementById('browse').style.display = 'block';
-                    document.getElementById('insert').style.display = 'none';
-                    document.getElementById('update').style.display = 'none';
-                    document.getElementById('delete').style.display = 'none';
-                }
-            }
-            function newVisits() { showform('insert'); }
-            function updateVisits(pid) { showform('update'); }
-            function deleteVisits(pid) { showform ('delete'); }
-            function browseVisits() { showform ('browse'); }
-            function showAll() { showform ('all'); }
-        </script>
+        
     </head>
 
-    <body onload="browseVisits()">
+    <body>
     <header>
         <h1>Mutual Aid Caregiving</h1>
         <h2>Visits</h2>
@@ -76,237 +34,51 @@
     </header>
 
     <main>
-        <div id="browse">
             <p>On this page, you can view all of the visits, edit the visits, or delete them. Note that these visits are not filtered by community. Also note that when creating a visit, you do not need to add a caregiver immediately, since this may be fulfilled by another neighbor.</p>
-            <p><a href="#" onClick="showAll()">Display all forms</a> </p>
-            <table border="1" cellpadding="5">
-                <tr>
-                    <th><a href="#" onClick="newVisits()">New</a></th>
-                    <th></th>
-                    <th>visitID</th>
-                    <th>neighbor</th>
-                    <th>caregiver</th>
-                    <th>startTime</th>
-                    <th>durationHours</th>
-                    <th>visitType</th>
-                    <th>location</th>
-                    <th>visitNotes</th>
-                    <th>fulfilled</th>
-                </tr>
-                <tr>
-                    <td><a href="#" onClick="updateVisits('this.visitID')">Edit</a></td>
-                    <td><a href="#" onclick="deleteVisits('this.visitID')">Delete</a></td>
-                    <td align="right" >1</td>
-                    <td >Kyron Lewis</td>
-                    <td >Beau Mckee</td>
-                    <td >2023-02-12 09:00:00</td>
-                    <td >6</td>
-                    <td >Childcare</td>
-                    <td >Apartment 217</td>
-                    <td >Babysitting my 2 kids!</td>
-                    <td >TRUE</td>
-                </tr>
-                <tr>
-                    <td><a href="#" onClick="updateVisits('this.visitID')">Edit</a></td>
-                    <td><a href="#" onclick="deleteVisits('this.visitID')">Delete</a></td>
-                    <td align="right" >2</td>
-                    <td>Lorna McClain</td>
-                    <td >Zaina Hopkins</td>
-                    <td >2023-02-14 15:00:00</td>
-                    <td >6</td>
-                    <td >Eldercare</td>
-                    <td >Lorna's House</td>
-                    <td >Can you take care of my elderly dad while I''m at work?</td>
-                    <td >TRUE</td>
-                </tr>
+            <!--
+            SELECT visitID, CONCAT(carereceivers.firstName,' ',carereceivers.lastName) AS \"Neighbor\", 
+            CONCAT(caregivers.firstName,' ',caregivers.lastName) AS \"careGiverName\", startTime, durationHours, 
+            typeName visitType, locationName location, visitNotes, fulfilled
+            --!>
+            
+            <table>
+            <!-- Access data tuple passed from app.py --> 
+            {% if data %}
+			    <thead>
+				    <tr>
+					    <!-- Iterate through each key in the first entry to get the column name -->
+                        {% for key in data[0].keys() %}
+					    
+                        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
+					    <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+					
+                        <!-- End of this for loop -->
+                        {% endfor %} 
+                        <th scope="col" data-filter-control="input"></th>
+                        <th scope="col" data-filter-control="input"></th>
+                    </tr>
 
-                <tr>
-                    <td><a href="#" onClick="updateVisits('this.visitID')">Edit</a></td>
-                    <td><a href="#" onclick="deleteVisits('this.visitID')">Delete</a></td>
-                    <td align="right" >3</td>
-                    <td>Beau Mckee</td>
-                    <td >NULL</td>
-                    <td >2023-02-15 14:00:00</td>
-                    <td >4</td>
-                    <td >Childcare</td>
-                    <td >Apartment Community Room</td>
-                    <td >Help watch my kid after school</td>
-                    <td >FALSE</td>
-                </tr>
-                <tr>
-                    <td><a href="#" onClick="updateVisits('this.visitID')">Edit</a></td>
-                    <td><a href="#" onclick="deleteVisits('this.visitID')">Delete</a></td>
-                    <td align="right" >3</td>
-                    <td>Krishan Newman</td>
-                    <td >NULL</td>
-                    <td >2023-02-17 10:00:00</td>
-                    <td >4</td>
-                    <td >Eldercare</td>
-                    <td >The Newman Residence</td>
-                    <td >I need help with my Mom this weekend</td>
-                    <td >FALSE</td>
-                </tr>
-                <tr>
-                    <td><a href="#" onClick="updateVisits('this.visitID')">Edit</a></td>
-                    <td><a href="#" onclick="deleteVisits('this.visitID')">Delete</a></td>
-                    <td align="right" >3</td>
-                    <td>Kyron Lewis</td>
-                    <td >NULL</td>
-                    <td >2023-02-17 16:00:00</td>
-                    <td >6</td>
-                    <td >Childcare</td>
-                    <td >Apartment 217</td>
-                    <td >Help babysit my 2 kids during my evening shift!</td>
-                    <td >FALSE</td>
-                </tr>
-            </table>
-            <p>&nbsp;</p>
-        </div> <!-- browse -->
-        <div id="insert">
-            <form method="POST" id="addVisits">
-                <fieldset class="fields">
-                    <legend><strong>Add Visit</strong></legend>
-                    <label for="neighbor"> Neighbor </label>
-                    <select id="neighbor" name="neighbor">
-                        <option value="0">&nbsp;</option>
-                        <option value="1">Zaina Hopkins</option>
-                        <option value="2">Lorna McClain</option>
-                        <option value="3">Mikolaj Frye</option>
-                        <option value="4">Aliza Moran</option>
-                        <option value="5">Kyron Lewis</option>
-                        <option value="6">Maksymillian Davila</option>
-                        <option value="7">Lowri Dillon</option>
-                        <option value="8">Beau Mckee</option>
-                        <option value="9">Jac Shepherd</option>
-                        <option value="10">Krishan Newman</option>
-                    </select>
-                    <label for="caregiver"> Caregiver </label>
-                    <select id="caregiver" name="caregiver">
-                        <option value="0">&nbsp;</option>
-                        <option value="1">Zaina Hopkins</option>
-                        <option value="2">Lorna McClain</option>
-                        <option value="3">Mikolaj Frye</option>
-                        <option value="4">Aliza Moran</option>
-                        <option value="5">Kyron Lewis</option>
-                        <option value="6">Maksymillian Davila</option>
-                        <option value="7">Lowri Dillon</option>
-                        <option value="8">Beau Mckee</option>
-                        <option value="9">Jac Shepherd</option>
-                        <option value="10">Krishan Newman</option>
-                    </select>
-                    <label> Start Time </label> <input type="date" name="startTime">
-                    <label> Duration (hours) </label> <input type="text" name="durationHours">
-                    <label for="location"> Location </label>
-                    <select id="location" name="location">
-                        <option value="0">&nbsp;</option>
-                        <option value="1">Lorna's House</option>
-                        <option value="2">Zaina's House</option>
-                        <option value="3">The Frye Residence</option>
-                        <option value="4">Friendly City Public Library</option>
-                        <option value="5">Apartment 217</option>
-                        <option value="6">Apartment Community Room</option>
-                        <option value="7">Bayside Community Center</option>
-                        <option value="8">The Newman Residence</option>
-                        <option value="9">Jac's Townhome</option>
-                    </select>
-                    <label for="visitType"> Visit Type </label>
-                    <select id="visitType" name="visitType">
-                        <option value="0">&nbsp;</option>
-                        <option value="1">Childcare</option>
-                        <option value="2">Eldercare</option>
-                    </select>
-                    <label for="visitNotes"> Visit Notes </label> <input type="text" name="visitNotes" id="visitNotes">
-                    <label for="fulfilled"> Fulfilled? </label>
-                    <input type="checkbox" id="fulfilled" name="fulfilled" value="1">
-                </fieldset>
-                <input class="btn" type="submit" id="addVisitsBtn" value="Add Visit">
-                <input class="btn" type="button" value="cancel" onClick="browseVisits()">
-            </form>
-        </div><!-- insert -->
-        <p>&nbsp;</p>
-        <div id="update">
-            <form method="POST" id="updateVisits">
-                <fieldset class="fields">
-                    <legend><strong>Update Visit</strong></legend>
-                    <label> ID:  </label> 1
-                    <label for="neighborUpdate"> Neighbor </label>
-                    <select id="neighborUpdate" name="neighborUpdate">
-                        <option value="1">Zaina Hopkins</option>
-                        <option value="2">Lorna McClain</option>
-                        <option value="3">Mikolaj Frye</option>
-                        <option value="4">Aliza Moran</option>
-                        <option value="5" selected>Kyron Lewis</option>
-                        <option value="6">Maksymillian Davila</option>
-                        <option value="7">Lowri Dillon</option>
-                        <option value="8">Beau Mckee</option>
-                        <option value="9">Jac Shepherd</option>
-                        <option value="10">Krishan Newman</option>
-                    </select>
-                    <label for="caregiverUpdate"> Caregiver </label>
-                    <select id="caregiverUpdate" name="caregiverUpdate">
-                        <option value="0">&nbsp;</option>
-                        <option value="1">Zaina Hopkins</option>
-                        <option value="2">Lorna McClain</option>
-                        <option value="3">Mikolaj Frye</option>
-                        <option value="4">Aliza Moran</option>
-                        <option value="5">Kyron Lewis</option>
-                        <option value="6">Maksymillian Davila</option>
-                        <option value="7">Lowri Dillon</option>
-                        <option value="8" selected>Beau Mckee</option>
-                        <option value="9">Jac Shepherd</option>
-                        <option value="10">Krishan Newman</option>
-                    </select>
-                    <label for="updateStartTime"> Start Time </label> <input id="updateStartTime" type="date" name="startTime" value="2023-02-12 09:00:00">
-                    <label> Duration (hours) </label> <input type="text" name="durationHours" value="6">
-                    <label> Visit Type </label>
-                    <select name="visitType">
-                        <option value="0">&nbsp;</option>
-                        <option value="1" selected>Childcare</option>
-                        <option value="2">Eldercare</option>
-                    </select>
-                    <label> Location </label>
-                    <select name="locationUpdate">
-                        <option value="0">&nbsp;</option>
-                        <option value="1">Lorna's House</option>
-                        <option value="2">Zaina's House</option>
-                        <option value="3">The Frye Residence</option>
-                        <option value="4">Friendly City Public Library</option>
-                        <option value="5" selected >Apartment 217</option>
-                        <option value="6">Apartment Community Room</option>
-                        <option value="7">Bayside Community Center</option>
-                        <option value="8">The Newman Residence</option>
-                        <option value="9">Jac's Townhome</option>
-                    </select>
-                    <label> Visit Notes </label> <input type="text" name="visitNotes" value="Babysitting my 2 kids!">
-                    <label for="fulfilledUpdate"> Fulfilled? </label>
-                    <input type="checkbox" id="fulfilledUpdate" name="fulfilledUpdate" value="1">
+				<tbody>
+					<!-- Now, iterate through every item in data -->{% for item in data %}
+					    <tr>
+						    <!-- Then iterate through every key in the current item dictionary -->
+                            {% for key in item.keys() %}
 
-                </fieldset>
-                <input class="btn" type="submit" id="UpdateSaveVisits" value="Save Update Visit">
-                <input class="btn" type="button" value="cancel" onClick="browseVisits()">
-            </form>
-        </div><!-- update -->
-        <p>&nbsp;</p>
-        <div id="delete" style="display: block">
-            <form method="POST" id="deleteVisits">
-                <legend><strong>Delete Visit</strong></legend>
-                <fieldset class="fields">
-                    <p>Are you sure you wish to delete the following?</p>
-                    <input type="hidden" name="visitID" id="deleteVisitsID" value="1">
-                    <label><strong>ID:</strong></label> 1
-                    <label> <strong>Neighbor</strong> </label> Kyron Lewis
-                    <label> <strong>Caregiver</strong> </label> Beau Mckee
-                    <label> <strong>Start Time</strong> </label> 2023-02-12 09:00:00
-                    <label> <strong>Duration (hours)</strong> </label> 6
-                    <label> <strong>Visit Type</strong> </label> Childcare
-                    <label> <strong>Location</strong> </label> Apartment 217
-                    <label> <strong>Visit Notes</strong> </label> Babysitting my 2 kids!
-                    <label> <strong>Fulfilled?</strong> </label> True
-                </fieldset>
-                <input class="btn" type="submit" id="DeleteVisitsBtn" value="Delete Visit">
-                <input class="btn" type="button" value="cancel" onClick="browseVisits()">
-            </form>
-        </div><!-- delete -->
+						    <!-- Create a <td> element with the value of that key in it -->
+						    <td> {{item[key]}}</td> 
+                            {% endfor %}
+
+                            <!-- Create our edit/delete buttons -->
+						    <td><a>Edit</a></td>
+						    <td><a>Delete</a></td>
+
+					    </tr> 
+                        {% endfor %} 
+                {% endif %} 
+            </table>   
+
+
+    
     </main>
 
     <footer>

@@ -4,15 +4,16 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mutual Aid Caregiving</title>
     <link rel="stylesheet" href="./static/css/main.css">
+
+
 </head>
 <body>
 
     <header>
         <h1>Mutual Aid Caregiving</h1>
-        <h2>Creating community through kindness</h2>
         <nav>
             <ul>
-            <li><a href="/index">Home</a></li>
+            <li><a href="/">Home</a></li>
             <li><a href="/neighbors">Neighbors</a></li>
             <li><a href="/locations">Locations</a></li>
             <li><a href="/communities">Communities</a></li>
@@ -28,8 +29,20 @@
     
 
     <main>
+    
+        <h2>Community Visits</h2>
+        <p>Welcome! On this page, you can quickly view all of the different visits filtered by community. You can also request a visit, or you can answer a visit request for one of your fellow community members.</p>
+        
+         <ul>
+         {% for community in community_data %}
 
+         <li><a href="/view_community_visits_{{ community.communityID }}">{{ community.communityName }}</a></li>
+         
 
+        {% endfor %}
+         </ul>
+            
+         
     </main>
 
     <footer>

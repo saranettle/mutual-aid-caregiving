@@ -25,12 +25,112 @@ mysql = MySQL(app)
 @app.route('/index.html')
 @app.route('/index')
 def root():
-    return render_template("main.j2")
+    
+    if request.method == "GET":
+        query = "SELECT communityID, communityName FROM Communities"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+    
+        return render_template("main.j2", community_data=data)
 
+@app.route("/view_community_visits_<int:communityID>", methods=["POST", "GET"])
+def view_community_visits(communityID):
 
-@app.route('/visits')
+    if request.method == "GET":
+        query = "SELECT * FROM Communities WHERE communityID = %s" % (communityID)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+
+        # query 2 for the fulfilled visits
+
+        query2 = "SELECT CONCAT(Neighbors.firstName, ' ', Neighbors.lastName) AS Neighbor, Visits.caregiver AS Caregiver, Locations.locationName AS Location, Visits.startTime AS Time, Visits.durationHours AS Hours, VisitTypes.typeName AS Category, Visits.visitNotes AS Notes FROM Visits INNER JOIN Locations ON Visits.location = Locations.locationID INNER JOIN Neighbors ON Visits.neighbor = Neighbors.neighborID INNER JOIN VisitTypes ON Visits.visitType = VisitTypes.visitTypeID INNER JOIN Communities on Locations.community = Communities.communityID WHERE Visits.fulfilled = 1 AND Communities.communityID = %s" % (communityID)
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        fulfilled_visit_data = cur.fetchall()
+
+        # query 3 for the unfulfilled visits names
+        query3 = "SELECT Visits.visitID, CONCAT(Neighbors.firstName, ' ', Neighbors.lastName) AS Neighbor, Locations.locationName AS Location, Visits.startTime AS Time, Visits.durationHours AS Hours, VisitTypes.typeName AS Category, Visits.visitNotes AS Notes FROM Visits INNER JOIN Locations ON Visits.location = Locations.locationID INNER JOIN Neighbors ON Visits.neighbor = Neighbors.neighborID INNER JOIN VisitTypes ON Visits.visitType = VisitTypes.visitTypeID INNER JOIN Communities on Locations.community = Communities.communityID WHERE Visits.fulfilled = 0 AND Communities.communityID = %s" % (communityID)
+        cur = mysql.connection.cursor()
+        cur.execute(query3)
+        unfulfilled_visit_data = cur.fetchall()
+
+        # query 4 for neighbor drop down
+        query4 = "SELECT Neighbors.neighborID, CONCAT(Neighbors.firstName, ' ', Neighbors.lastName) AS neighborName FROM Neighbors INNER JOIN CommunityHasNeighbors ON Neighbors.neighborID = CommunityHasNeighbors.neighbor INNER JOIN Communities ON CommunityHasNeighbors.community = Communities.communityID WHERE Communities.communityID = %s" % (communityID)
+        cur = mysql.connection.cursor()
+        cur.execute(query4)
+        neighbor_data = cur.fetchall()
+
+        # query 5 for location drop down
+        query5 = "SELECT Locations.locationID, Locations.locationName FROM Locations INNER JOIN Communities ON Locations.community = Communities.communityID WHERE Communities.communityID = %s" % (communityID)
+        cur = mysql.connection.cursor()
+        cur.execute(query5)
+        location_data = cur.fetchall()
+
+        # query 6 for visit_type drop down
+        query6 = "SELECT VisitTypes.visitTypeID, VisitTypes.typeName FROM VisitTypes"
+        cur = mysql.connection.cursor()
+        cur.execute(query6)
+        visit_type_data = cur.fetchall()
+
+        return render_template("view_community_visits.j2", community_data=data, fulfilled_visits=fulfilled_visit_data, unfulfilled_visits= unfulfilled_visit_data, neighbors=neighbor_data, locations=location_data, visit_types=visit_type_data)
+    
+    if request.method == "POST":
+        if request.form.get("request_visit"):
+            neighborName = request.form["neighborName"]
+            locationName = request.form["locationName"]
+            startTime = request.form["startTime"]
+            durationHours = request.form["durationHours"]
+            visitType = request.form["visitType"]
+            visitNotes = request.form["visitNotes"]
+            query = "INSERT INTO Visits (neighbor, location, startTime, durationHours, visitType, visitNotes) VALUES (%s, %s, %s, %s, %s, %s)"
+            cur = mysql.connection.cursor()
+            cur.execute(query, (neighborName, locationName, startTime, durationHours, visitType, visitNotes))
+            mysql.connection.commit()
+            return redirect("/")
+        
+@app.route("/answer_request/<int:visitID>", methods=["POST", "GET"])
+def answer_request(visitID):
+    
+    # query to pull info about visit based on visit ID
+    if request.method == "GET":
+        query = "SELECT Visits.visitID, CONCAT(Neighbors.firstName, ' ', Neighbors.lastName) AS Neighbor, Locations.locationName AS Location, Visits.startTime AS Time, Visits.durationHours AS Hours, VisitTypes.typeName AS Category, Visits.visitNotes AS Notes FROM Visits INNER JOIN Locations ON Visits.location = Locations.locationID INNER JOIN Neighbors ON Visits.neighbor = Neighbors.neighborID INNER JOIN VisitTypes ON Visits.visitType = VisitTypes.visitTypeID WHERE Visits.visitID =  %s" % (visitID)
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+    
+        # query to pull neighbors for drop down
+        query2 = "SELECT Neighbors.neighborID, CONCAT(Neighbors.firstName, ' ', Neighbors.lastName) AS neighborName FROM Neighbors INNER JOIN CommunityHasNeighbors ON Neighbors.neighborID = CommunityHasNeighbors.neighbor INNER JOIN Communities ON CommunityHasNeighbors.community = Communities.communityID INNER JOIN Locations ON Communities.communityID = Locations.community INNER JOIN Visits ON Locations.locationID = Visits.location WHERE Visits.visitID = %s" % (visitID)
+        cur = mysql.connection.cursor()
+        cur.execute(query2)
+        neighbor_data = cur.fetchall()
+
+        return render_template('/answer_request.j2', data=data, neighbors=neighbor_data)
+    
+    if request.method == "POST":
+        if request.form.get("answer_request"):
+            visitID = request.form["visitID"]
+            neighborName = request.form["neighborName"]
+            fulfilled = request.form["fulfilled"]
+            
+            query = ("UPDATE Visits SET Visits.caregiver = %s, Visits.fulfilled = %s WHERE Visits.visitID = %s")
+            cur = mysql.connection.cursor()
+            cur.execute(query, (neighborName, fulfilled, visitID))
+            mysql.connection.commit()
+
+            return redirect("/")
+
+@app.route('/visits', methods=["GET"])
 def visits():
-    return render_template("visits.j2")
+
+    if request.method == "GET":
+        query = "SELECT visitID, CONCAT(carereceivers.firstName,' ',carereceivers.lastName) AS \"Neighbor\", CONCAT(caregivers.firstName,' ',caregivers.lastName) AS \"careGiverName\", startTime, durationHours, typeName visitType, locationName location, visitNotes, fulfilled FROM Visits INNER JOIN Neighbors AS carereceivers ON neighbor = carereceivers.neighborID LEFT OUTER JOIN Neighbors AS caregivers ON caregiver = caregivers.neighborID INNER JOIN Locations ON location = locationID INNER JOIN VisitTypes ON visitTypeID = visitType ORDER BY visitID"
+        cur = mysql.connection.cursor()
+        cur.execute(query)
+        data = cur.fetchall()
+
+    return render_template("visits.j2", data=data)
 
 
 @app.route('/visit_types')

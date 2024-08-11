@@ -41,7 +41,7 @@ CREATE TABLE CommunityHasNeighbors (
     ON DELETE CASCADE,
     CONSTRAINT FOREIGN KEY (community)
     REFERENCES Communities(communityID)
-    ON DELETE CASCADE,
+    ON DELETE RESTRICT,
     PRIMARY KEY(communityHasNeighborID)
 );
 
@@ -140,7 +140,7 @@ INSERT INTO Neighbors (firstName, lastName, neighborPhone) VALUES
     ('Krishan', 'Newman', '333-123-4567');
 
 -- Insert into CommunityHasNeighbors
-INSERT INTO CommunityHasNeighbors (neighbor, community) VALUES
+INSERT INTO CommunityHasNeighbors (community, neighbor) VALUES
     (1, 1),
     (1, 2),
     (1, 3),

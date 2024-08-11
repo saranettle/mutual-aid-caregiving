@@ -1,0 +1,189 @@
+<html>
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutual Aid Caregiving</title>
+    <link rel="stylesheet" href="./static/css/main.css">
+
+
+</head>
+<body>
+
+    <header>
+        <h1>Mutual Aid Caregiving</h1>
+        <nav>
+            <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/neighbors">Neighbors</a></li>
+            <li><a href="/locations">Locations</a></li>
+            <li><a href="/communities">Communities</a></li>
+            <li><a href="/visits">Visits</a></li>
+            <li><a href="/certifications">Certifications</a></li>
+            <li><a href="/visit_types">Visit Types</a></li>
+            <li><a href="/certify_neighbors">Certify Neighbors</a></li>
+            <li><a href="/community_neighbors">Community Neighbors</a></li>
+            <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <main>
+    
+    
+        <h2>Community Visits for {{ community_data[0].communityName }}</h2>
+        <p>Welcome! On this page, you can quickly view all of the different visits filtered by community. You can also request a visit, or you can answer a visit request for one of your fellow community members. Click <a href="/">here</a> to go back to the home page.</p>
+
+        <!--
+        Unfulfilled visits
+        A for loop going through query (unfulfilled_visit_data)
+        For every row, a link to go to a new page (fulfill_visit_{id})
+
+        --!>
+
+        <h3>Request a Visit</h3>
+
+        <form id="request_visit" action="/view_community_visits_{{ community_data[0].communityID }}" method="post">
+			<legend>Request a caregiving visit</legend>
+			<fieldset>
+
+        
+
+				<label for="neighborName">Choose your name</label>
+                <select id="neighborName" name="neighborName">
+                    <option value="0">&nbsp;</option>
+
+                    {% for neighbor in neighbors %}
+                        <option value="{{ neighbor.neighborID }}"> {{neighbor.neighborName}}</option>
+                        <!-- End of this for loop -->
+                    {% endfor %}
+                </select>
+
+                <label for="locationName">Choose your location</label>
+                <select id="locationName" name="locationName">
+                    <option value="0">&nbsp;</option>
+
+                    {% for location in locations %}
+                        <option value="{{ location.locationID }}"> {{location.locationName}}</option>
+                        <!-- End of this for loop -->
+                    {% endfor %}
+                </select>
+
+
+                <label for="startTime">Select the date and start time of your visit request</label>
+                <input type="datetime-local" id="startTime" name="startTime">
+
+                <label for="durationHours">How long is your visit request? (Full hours only)</label>
+                <input type="number" id="durationHours" name="durationHours">
+
+                <label for="visitType">What type of visit is this?</label>
+                <select id="visitType" name="visitType">
+                    <option value="0">&nbsp;</option>
+
+                    {% for visit_type in visit_types %}
+                        <option value="{{ visit_type.visitTypeID }}"> {{visit_type.typeName}}</option>
+                        <!-- End of this for loop -->
+                    {% endfor %}
+                </select>
+
+                <label for="visitNotes">Please leave some notes for this visit.</label>
+                <textarea name="visitNotes" id="visitNotes">Enter your notes here...</textarea>
+                
+				
+            </fieldset>
+
+			<input type="submit" value="Submit Request" name="request_visit">
+            </form>
+
+
+        <h3>Answer a Visit Request</h3>
+        {% if unfulfilled_visits %}
+        <table>
+            <!-- Access data tuple passed from app.py --> 
+            
+			    <thead>
+				    <tr>
+					    <!-- Iterate through each key in the first entry to get the column name -->
+                        {% for key in unfulfilled_visits[0].keys() %}
+					    
+                        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
+					    <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+					
+                        <!-- End of this for loop -->
+                        {% endfor %} 
+                        <th scope="col" data-filter-control="input"></th>
+                    </tr>
+
+				<tbody>
+					<!-- Now, iterate through every item in data -->
+                    {% for item in unfulfilled_visits %}
+					    <tr>
+						    <!-- Then iterate through every key in the current item dictionary -->
+                            {% for key in item.keys() %}
+
+						    <!-- Create a <td> element with the value of that key in it -->
+						    <td> {{item[key]}}</td> 
+                            {% endfor %}
+                            
+
+                            <td><a href="/answer_request/{{ item.visitID }}">Answer this request</a></td> 
+
+					    </tr> 
+                        {% endfor %} 
+                 
+                
+        </table>
+                {% else %}
+                <p>There are no requests at this moment.</p>
+            {% endif %}
+
+        <h3>Past Visits</h3>
+
+        {% if fulfilled_visits %}
+        <table>
+            <!-- Access data tuple passed from app.py --> 
+            
+			    <thead>
+				    <tr>
+					    <!-- Iterate through each key in the first entry to get the column name -->
+                        {% for key in fulfilled_visits[0].keys() %}
+					    
+                        <!-- Create a <th> tag with the key inside of it, this will be our header row -->
+					    <th scope="col" data-field="{{ key }}" data-filter-control="input">{{ key }}</th>
+					
+                        <!-- End of this for loop -->
+                        {% endfor %} 
+                        <th scope="col" data-filter-control="input"></th>
+                    </tr>
+
+				<tbody>
+					<!-- Now, iterate through every item in data -->
+                    {% for item in fulfilled_visits %}
+					    <tr>
+						    <!-- Then iterate through every key in the current item dictionary -->
+
+						    {% for key in item.keys() %}
+
+						    <!-- Create a <td> element with the value of that key in it -->
+						    <td> {{item[key]}}</td> 
+                            {% endfor %}
+
+					    </tr> 
+                        {% endfor %} 
+                
+        </table>
+            {% else %}
+            <p>There have been no completed visit requests so far.</p>
+
+        {% endif %} 
+
+
+
+    </main>
+
+    <footer>
+        <p>Made by Chris Blum and Sara Nettle 2024</p>
+    </footer>
+
+</body>
+</html>
