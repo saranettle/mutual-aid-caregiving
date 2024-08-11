@@ -62,16 +62,16 @@
     <h2>Certifications</h2>
     <nav>
         <ul>
-            <li><a href="index">Home</a></li>
-            <li><a href="neighbors">Neighbors</a></li>
-            <li><a href="locations">Locations</a></li>
-            <li><a href="communities">Communities</a></li>
-            <li><a href="visits">Visits</a></li>
-            <li><a href="certifications">Certifications</a></li>
-            <li><a href="visit_types">Visit Types</a></li>
-            <li><a href="certify_neighbors">Certify Neighbors</a></li>
-            <li><a href="community_neighbors">Community Neighbors</a></li>
-            <li><a href="about">About</a></li>
+            <li><a href="/index">Home</a></li>
+            <li><a href="/neighbors">Neighbors</a></li>
+            <li><a href="/locations">Locations</a></li>
+            <li><a href="/communities">Communities</a></li>
+            <li><a href="/visits">Visits</a></li>
+            <li><a href="/certifications">Certifications</a></li>
+            <li><a href="/visit_types">Visit Types</a></li>
+            <li><a href="/certify_neighbors">Certify Neighbors</a></li>
+            <li><a href="/community_neighbors">Community Neighbors</a></li>
+            <li><a href="/about">About</a></li>
         </ul>
     </nav>
 </header>
@@ -86,7 +86,7 @@
                 <th></th>
                 <!-- Iterate through each key in the first entry to get the
                 column name -->
-                {% for key in certifications[0].keys() %}
+                {% for key in data[0].keys() %}
 
                     <!-- Create a <th> tag with the key inside of it, this will be
                     our header row -->
@@ -95,10 +95,10 @@
                     <!-- End of this for loop -->
                 {% endfor %}
             </tr>
-            {% for certification in certifications %}
+            {% for certification in data %}
             <tr>
-                <td><a href="#" onClick="updateCertifications('this.certificationID')">Edit</a></td>
-                <td><a href="#" onclick="deleteCertifications('this.certificationID')">Delete</a></td>
+                <td><a href="/edit_certification/{{certification.certificationID}}">Edit</a></td>
+                <td><a href="/delete_certification/{{certification.certificationID}}">Delete</a></td>
                 {% for key in certification.keys() %}
                 <td>{{certification[key]}}</td>
                 {% endfor %}
@@ -118,37 +118,9 @@
         </form>
     </div><!-- insert -->
     <p>&nbsp;</p>
-    <div id="update">
-        <form method="POST" id="updateCertifications">
-            <legend><strong>Update Certification</strong></legend>
-            <fieldset class="fields">
-                <input type="hidden" name="certificationID" id="updateCertificationsID" value="1">
-                <label> ID: </label> 1
-                <label> Certification Title </label> <input type="text" name="certificationTitle">
-            </fieldset>
-            <input class="btn" type="submit" id="UpdateSaveCertifications" value="Save Update Certification">
-            <input class="btn" type="button" value="cancel" onClick="browseCertifications()">
-        </form>
-    </div><!-- update -->
-    <p>&nbsp;</p>
-    <div id="delete" style="display: block">
-        <form method="POST" id="deleteCertifications">
-            <legend><strong>Delete Certification</strong></legend>
-            <fieldset class="fields">
-                <p>Are you sure you wish to delete the following?</p>
-                <input type="hidden" name="certificationID" id="deleteCertificationsID" value="1">I a
-                <label><strong>ID:</strong></label> 1
-                <label> <strong>Certification Title</strong> </label> CPR Certfied
-
-            </fieldset>
-            <input class="btn" type="submit" id="DeleteCertificationsBtn" value="Delete Certification">
-            <input class="btn" type="button" value="cancel" onClick="browseCertifications()">
-        </form>
-    </div><!-- delete -->
 </main>
 
 <footer>
     <p>Made by Chris Blum and Sara Nettle 2024</p>
 </footer>
-
 </body>

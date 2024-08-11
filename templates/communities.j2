@@ -62,16 +62,16 @@
     <h2>Communities</h2>
     <nav>
         <ul>
-            <li><a href="index">Home</a></li>
-            <li><a href="neighbors">Neighbors</a></li>
-            <li><a href="locations">Locations</a></li>
-            <li><a href="communities">Communities</a></li>
-            <li><a href="visits">Visits</a></li>
-            <li><a href="certifications">Certifications</a></li>
-            <li><a href="visit_types">Visit Types</a></li>
-            <li><a href="certify_neighbors">Certify Neighbors</a></li>
-            <li><a href="community_neighbors">Community Neighbors</a></li>
-            <li><a href="about">About</a></li>
+            <li><a href="/index">Home</a></li>
+            <li><a href="/neighbors">Neighbors</a></li>
+            <li><a href="/locations">Locations</a></li>
+            <li><a href="/communities">Communities</a></li>
+            <li><a href="/visits">Visits</a></li>
+            <li><a href="/certifications">Certifications</a></li>
+            <li><a href="/visit_types">Visit Types</a></li>
+            <li><a href="/certify_neighbors">Certify Neighbors</a></li>
+            <li><a href="/community_neighbors">Community Neighbors</a></li>
+            <li><a href="/about">About</a></li>
         </ul>
     </nav>
 </header>
@@ -84,27 +84,26 @@
             <tr>
                 <th><a href="#" onClick="newCommunity()">New</a></th>
                 <th></th>
-                <th>communityID</th>
-                <th>communityName</th>
+                <!-- Iterate through each key in the first entry to get the
+                column name -->
+                {% for key in data[0].keys() %}
+
+                    <!-- Create a <th> tag with the key inside of it, this will be
+                    our header row -->
+                    <th>{{ key }}</th>
+
+                    <!-- End of this for loop -->
+                {% endfor %}
             </tr>
-            <tr>
-                <td><a href="#" onClick="updateCommunity('this.communityID')">Edit</a></td>
-                <td><a href="#" onclick="deleteCommunity('this.communityID')">Delete</a></td>
-                <td align="right" >1</td>
-                <td >North Bay Hills</td>
-            </tr>
-            <tr>
-                <td><a href="#" onClick="updateCommunity('this.communityID')">Edit</a></td>
-                <td><a href="#" onclick="deleteCommunity('this.communityID')">Delete</a></td>
-                <td align="right" >2</td>
-                <td>Vista Apartments</td>
-            </tr>
-            <tr>
-                <td><a href="#" onClick="updateCommunity('this.communityID')">Edit</a></td>
-                <td><a href="#" onclick="deleteCommunity('this.communityID')">Delete</a></td>
-                <td align="right" >3</td>
-                <td>Gooseberry Collective</td>
-            </tr>
+            {% for community in data %}
+                <tr>
+                    <td><a href="edit_community/{{community.communityID}}">Edit</a></td>
+                    <td><a href="delete_community/{{community.communityID}}">Delete</a></td>
+                    {% for key in community.keys() %}
+                        <td>{{community[key]}}</td>
+                    {% endfor %}
+                </tr>
+            {% endfor %}
         </table>
         <p>&nbsp;</p>
     </div> <!-- browse -->
@@ -119,33 +118,6 @@
         </form>
     </div><!-- insert -->
     <p>&nbsp;</p>
-    <div id="update">
-        <form method="POST" id="updateCommunity">
-            <legend><strong>Update Community</strong></legend>
-            <fieldset class="fields">
-                <input type="hidden" name="communityID" id="updateCommunityID" value="1">
-                <label> ID: </label> 1
-                <label> Community Name </label> <input type="text" name="communityName">
-            </fieldset>
-            <input class="btn" type="submit" id="UpdateSaveCommunity" value="Save Update Community">
-            <input class="btn" type="button" value="cancel" onClick="browseCommunities()">
-        </form>
-    </div><!-- update -->
-    <p>&nbsp;</p>
-    <div id="delete" style="display: block">
-        <form method="POST" id="deleteCommunity">
-            <legend><strong>Delete Community</strong></legend>
-            <fieldset class="fields">
-                <p>Are you sure you wish to delete the following?</p>
-                <input type="hidden" name="communityID" id="deleteCommunityID" value="1">
-                <label><strong>ID:</strong></label> 1
-                <label> <strong>Community Name</strong> </label> North Bay Hills
-
-            </fieldset>
-            <input class="btn" type="submit" id="DeleteCommunityBtn" value="Delete Community">
-            <input class="btn" type="button" value="cancel" onClick="browseCommunities()">
-        </form>
-    </div><!-- delete -->
 </main>
 
 <footer>

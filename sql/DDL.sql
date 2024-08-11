@@ -41,7 +41,7 @@ CREATE TABLE CommunityHasNeighbors (
     ON DELETE CASCADE,
     CONSTRAINT FOREIGN KEY (community)
     REFERENCES Communities(communityID)
-    ON DELETE RESTRICT,
+    ON DELETE CASCADE,
     PRIMARY KEY(communityHasNeighborID)
 );
 

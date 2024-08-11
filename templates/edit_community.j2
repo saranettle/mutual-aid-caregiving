@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mutual Aid Caregiving</title>
-    <link rel="stylesheet" href="./static/css/main.css">
+    <link rel="stylesheet" href="../../static/css/main.css">
 </head>
 <body>
 
@@ -30,28 +30,19 @@
             </ul>
         </nav>
     </header>
-    
-
     <main>
-
-            
-            <form id="add_neighbor" action="/add_neighbor" method="post">
-			<legend><Add a Neighbor</legend>
-			<fieldset>
-
-				<label for="make">first name:</label>
-				<input type="text" class="form-control" id="firstName" name="firstName" placeholder="" required>
-
-				<label for="model">last name:</label>
-				<input type="text" class="form-control" id="lastName" name="lastName" placeholder="" required>
-
-				<label for="color">phone number:</label>
-				<input type="text" class="form-control" id="neighborPhone" name="neighborPhone" placeholder=""> 
-            </fieldset>
-
-			<input type="submit" value="Add Neighbor" name="add_neighbor">
+        <div id="edit">
+            <form id="edit_community" method="POST"  action="/edit_community/{{data[0].communityID}}">
+                <legend><strong>Update Community</strong></legend>
+                <fieldset class="fields">
+                    <input type="hidden" name="communityID" id="communityID" value="{{data[0].communityID}}">
+                    <label> ID: </label> 1
+                    <label> Community Name </label> <input type="text" name="communityName" value="{{data[0].communityName}}">
+                </fieldset>
+                <input class="btn" type="submit" id="UpdateSaveCommunity" value="Save Update Community">
+                <input class="btn" type="button" value="cancel" onClick="browseCommunities()">
             </form>
-
+        </div>
     </main>
     <footer>
         <p>Made by Chris Blum and Sara Nettle 2024</p>

@@ -85,8 +85,8 @@ nav {
 nav a {
   font-size: 1.25em;
   text-align: center;
-  margin: 0 auto;
-  padding: .5em;
+  margin: auto;
+  padding: .1em;
   width: 100%;
 }
 
@@ -99,6 +99,7 @@ nav ul {
 
 
 nav ul li {
+    justify-content: left;
   list-style-type: none;
   margin: .8em;
 }

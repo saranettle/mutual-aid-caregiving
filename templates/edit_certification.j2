@@ -9,7 +9,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mutual Aid Caregiving</title>
-    <link rel="stylesheet" href="./static/css/main.css">
+    <link rel="stylesheet" href="../../static/css/main.css">
 </head>
 <body>
 
@@ -30,28 +30,17 @@
             </ul>
         </nav>
     </header>
-    
-
     <main>
-
-            
-            <form id="add_neighbor" action="/add_neighbor" method="post">
-			<legend><Add a Neighbor</legend>
-			<fieldset>
-
-				<label for="make">first name:</label>
-				<input type="text" class="form-control" id="firstName" name="firstName" placeholder="" required>
-
-				<label for="model">last name:</label>
-				<input type="text" class="form-control" id="lastName" name="lastName" placeholder="" required>
-
-				<label for="color">phone number:</label>
-				<input type="text" class="form-control" id="neighborPhone" name="neighborPhone" placeholder=""> 
-            </fieldset>
-
-			<input type="submit" value="Add Neighbor" name="add_neighbor">
+        <div id="edit">
+            <form id="edit_certification" method="POST"  action="/edit_certification/{{data[0].certificationID}}">
+                <legend><strong>Update Certification</strong></legend>
+                <fieldset class="fields">
+                    <input type="hidden" name="certificationID" id="certificationID" value="{{data[0].certificationID}}">
+                    <label> Certification Title </label> <input type="text" name="certificationTitle" value="{{data[0].certificationTitle}}">
+                </fieldset>
+                <input class="btn" type="submit" id="UpdateSaveCertification" value="Save Update Certification">
             </form>
-
+        </div>
     </main>
     <footer>
         <p>Made by Chris Blum and Sara Nettle 2024</p>
