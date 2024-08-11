@@ -29,10 +29,10 @@ mysql = MySQL(app)
 def root():
     return render_template("main.j2")
 
-
 @app.route('/visits')
 def visits():
     return render_template("visits.j2")
+
 
 @app.route('/visit_types')
 def visit_types():
@@ -49,6 +49,7 @@ def neighbors():
         data = cur.fetchall()
 
     return render_template("neighbors.j2", data=data)
+
 
 @app.route('/add_neighbor', methods=["GET", "POST"])
 def add_neighbor():
@@ -68,6 +69,7 @@ def add_neighbor():
             return redirect("/neighbors")
         
     return render_template("add_neighbor.j2")
+
 
 @app.route("/delete_neighbor/<int:neighborID>")
 def delete_neighbor(neighborID):
@@ -475,3 +477,4 @@ def about():
 if __name__ == "__main__":
     # Start the app on port 3000, it will be different once hosted
     app.run(port=3000, debug=True)
+
