@@ -11,9 +11,9 @@ import os
 app = Flask(__name__)
 
 app.config['MYSQL_HOST'] = 'classmysql.engr.oregonstate.edu'
-app.config['MYSQL_USER'] = 'cs340_nettles'
-app.config['MYSQL_PASSWORD'] = '4130'  # last 4 of onid
-app.config['MYSQL_DB'] = 'cs340_nettles'
+app.config['MYSQL_USER'] = 'cs340_blumch'
+app.config['MYSQL_PASSWORD'] = 'rxVlhZmxgVhD'  # last 4 of onid
+app.config['MYSQL_DB'] = 'cs340_blumch'
 app.config['MYSQL_CURSORCLASS'] = "DictCursor"
 
 mysql = MySQL(app)
@@ -698,3 +698,4 @@ def about():
 if __name__ == "__main__":
     # Start the app on port 3000, it will be different once hosted
     app.run(port=31193, debug=True)
+
