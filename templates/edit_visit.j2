@@ -69,10 +69,13 @@
 
                 <label for="visitType">What type of visit is this?</label>
                 <select id="visitType" name="visitType">
-                    <option value="{{ data[0].visitTypeID }}">{{ data[0].visitType }}</option>
 
                     {% for visit_type in visit_types %}
-                        <option value="{{ visit_type.visitTypeID }}"> {{visit_type.typeName}}</option>
+                        {% if visit_type['visitTypeID'] == data[0].visitType %}
+                            <option value="{{ visit_type['visitTypeID'] }}" selected> {{visit_type['typeName']}}</option>
+                        {% else %}
+                            <option value="{{ visit_type['visitTypeID'] }}"> {{visit_type['typeName']}}</option>
+                        {% endif %}
                         <!-- End of this for loop -->
                     {% endfor %}
                 </select>
