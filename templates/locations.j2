@@ -80,10 +80,10 @@
     <div id="browse">
         <p>On this page, you can add, delete, or edit a location. Locations are used to represent the places where visits may take place, are are set by the neighbor who makes the request. They are typically only accessible to neighbors who share a community.</p>
         <p><a href="#" onClick="showAll()">Display all forms</a> </p>
-        <table border="1" cellpadding="5">
+        <p>Add a new Location <a href="#" onClick="newLocations()">here.</a></p>
+        <table>
+            <thead>
             <tr>
-                <th><a href="#" onClick="newLocations()">New</a></th>
-                <th></th>
                 <!-- Iterate through each key in the first entry to get the
                 column name -->
                 {% for key in data[0].keys() %}
@@ -94,14 +94,16 @@
 
                     <!-- End of this for loop -->
                 {% endfor %}
+                <th scope="col" data-filter-control="input"></th>
+                <th scope="col" data-filter-control="input"></th>
             </tr>
             {% for location in data %}
                 <tr>
-                    <td><a href="edit_location/{{location.locationID}}">Edit</a></td>
-                    <td><a href="delete_location/{{location.locationID}}">Delete</a></td>
                     {% for key in location.keys() %}
                         <td>{{location[key]}}</td>
                     {% endfor %}
+                    <td><a href="edit_location/{{location.locationID}}">Edit</a></td>
+                    <td><a href="delete_location/{{location.locationID}}">Delete</a></td>
                 </tr>
             {% endfor %}
         </table>

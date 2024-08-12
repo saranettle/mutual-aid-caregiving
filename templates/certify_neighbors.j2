@@ -80,10 +80,10 @@
     <div id="browse">
         <p>On this page, you can give neighbors a certification, or you can remove the certification. This information allows for neighbors to self-report whether they qualify to do certain tasks for their fellow community members.</p>
         <p><a href="#" onClick="showAll()">Display all forms</a> </p>
-        <table border="1" cellpadding="5">
+        <p>Assign a new Certification to a Neighbor <a href="#" onClick="newNeighborCertification()">here.</a></p>
+        <table>
+            <thead>
             <tr>
-                <th><a href="#" onClick="newNeighborCertification()">New</a></th>
-                <th></th>
                 <!-- Iterate through each key in the first entry to get the
                 column name -->
                 {% for key in certify_neighbors[0].keys() %}
@@ -94,14 +94,16 @@
 
                     <!-- End of this for loop -->
                 {% endfor %}
+            <th scope="col" data-filter-control="input"></th>
+                <th scope="col" data-filter-control="input"></th>
             </tr>
             {% for certified_neighbor in certify_neighbors %}
                 <tr>
-                    <td><a href="edit_certify_neighbors/{{certified_neighbor.neighborHasCertificationID}}">Edit</a></td>
-                    <td><a href="delete_certify_neighbors/{{certified_neighbor.neighborHasCertificationID}}">Delete</a></td>
                     {% for key in certified_neighbor.keys() %}
                         <td>{{certified_neighbor[key]}}</td>
                     {% endfor %}
+                <td><a href="edit_certify_neighbors/{{certified_neighbor.neighborHasCertificationID}}">Edit</a></td>
+                    <td><a href="delete_certify_neighbors/{{certified_neighbor.neighborHasCertificationID}}">Delete</a></td>
                 </tr>
             {% endfor %}
         </table>

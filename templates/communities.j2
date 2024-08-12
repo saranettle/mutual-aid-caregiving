@@ -60,30 +60,30 @@
 <header>
     <h1>Mutual Aid Caregiving</h1>
     <h2>Communities</h2>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/neighbors">Neighbors</a></li>
-                <li><a href="/locations">Locations</a></li>
-                <li><a href="/communities">Communities</a></li>
-                <li><a href="/visits">Visits</a></li>
-                <li><a href="/certifications">Certifications</a></li>
-                <li><a href="/visit_types">Visit Types</a></li>
-                <li><a href="/certify_neighbors">Certify Neighbors</a></li>
-                <li><a href="/community_neighbors">Community Neighbors</a></li>
-                <li><a href="/about">About</a></li>
-            </ul>
-        </nav>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/neighbors">Neighbors</a></li>
+            <li><a href="/locations">Locations</a></li>
+            <li><a href="/communities">Communities</a></li>
+            <li><a href="/visits">Visits</a></li>
+            <li><a href="/certifications">Certifications</a></li>
+            <li><a href="/visit_types">Visit Types</a></li>
+            <li><a href="/certify_neighbors">Certify Neighbors</a></li>
+            <li><a href="/community_neighbors">Community Neighbors</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </nav>
 </header>
 
 <main>
     <div id="browse">
         <p>On this page, you can add, edit, or delete a community. Note, you cannot delete a community if it has neighbors - you will need to delete the individual neighbors first.</p>
         <p><a href="#" onClick="showAll()">Display all forms</a> </p>
-        <table border="1" cellpadding="5">
+        <p>Add a new Community <a href="#" onClick="newCommunity()">here.</a></p>
+        <table>
+            <thead>
             <tr>
-                <th><a href="#" onClick="newCommunity()">New</a></th>
-                <th></th>
                 <!-- Iterate through each key in the first entry to get the
                 column name -->
                 {% for key in data[0].keys() %}
@@ -94,14 +94,16 @@
 
                     <!-- End of this for loop -->
                 {% endfor %}
+                <th scope="col" data-filter-control="input"></th>
+                <th scope="col" data-filter-control="input"></th>
             </tr>
             {% for community in data %}
                 <tr>
-                    <td><a href="edit_community/{{community.communityID}}">Edit</a></td>
-                    <td><a href="delete_community/{{community.communityID}}">Delete</a></td>
                     {% for key in community.keys() %}
                         <td>{{community[key]}}</td>
                     {% endfor %}
+                    <td><a href="edit_community/{{community.communityID}}">Edit</a></td>
+                    <td><a href="delete_community/{{community.communityID}}">Delete</a></td>
                 </tr>
             {% endfor %}
         </table>

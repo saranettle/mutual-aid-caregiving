@@ -60,30 +60,30 @@
 <header>
     <h1>Mutual Aid Caregiving</h1>
     <h2>Certifications</h2>
-        <nav>
-            <ul>
-                <li><a href="/">Home</a></li>
-                <li><a href="/neighbors">Neighbors</a></li>
-                <li><a href="/locations">Locations</a></li>
-                <li><a href="/communities">Communities</a></li>
-                <li><a href="/visits">Visits</a></li>
-                <li><a href="/certifications">Certifications</a></li>
-                <li><a href="/visit_types">Visit Types</a></li>
-                <li><a href="/certify_neighbors">Certify Neighbors</a></li>
-                <li><a href="/community_neighbors">Community Neighbors</a></li>
-                <li><a href="/about">About</a></li>
-            </ul>
-        </nav>
+    <nav>
+        <ul>
+            <li><a href="/">Home</a></li>
+            <li><a href="/neighbors">Neighbors</a></li>
+            <li><a href="/locations">Locations</a></li>
+            <li><a href="/communities">Communities</a></li>
+            <li><a href="/visits">Visits</a></li>
+            <li><a href="/certifications">Certifications</a></li>
+            <li><a href="/visit_types">Visit Types</a></li>
+            <li><a href="/certify_neighbors">Certify Neighbors</a></li>
+            <li><a href="/community_neighbors">Community Neighbors</a></li>
+            <li><a href="/about">About</a></li>
+        </ul>
+    </nav>
 </header>
 
 <main>
     <div id="browse">
         <p>On this page, you can add, edit, or delete certifications. Note, this page will not allow you to give certifications to neighbors.</p>
         <p><a href="#" onClick="showAll()">Display all forms</a> </p>
-        <table border="1" cellpadding="5">
+        <p>Add a new Certification <a href="#" onClick="newCertifications()">here.</a></p>
+        <table>
+            <thead>
             <tr>
-                <th><a href="#" onClick="newCertifications()">New</a></th>
-                <th></th>
                 <!-- Iterate through each key in the first entry to get the
                 column name -->
                 {% for key in data[0].keys() %}
@@ -94,15 +94,18 @@
 
                     <!-- End of this for loop -->
                 {% endfor %}
+                <th scope="col" data-filter-control="input"></th>
+                <th scope="col" data-filter-control="input"></th>
             </tr>
             {% for certification in data %}
-            <tr>
-                <td><a href="/edit_certification/{{certification.certificationID}}">Edit</a></td>
-                <td><a href="/delete_certification/{{certification.certificationID}}">Delete</a></td>
-                {% for key in certification.keys() %}
-                <td>{{certification[key]}}</td>
-                {% endfor %}
-            </tr>
+                <tr>
+
+                    {% for key in certification.keys() %}
+                        <td>{{certification[key]}}</td>
+                    {% endfor %}
+                    <td><a href="/edit_certification/{{certification.certificationID}}">Edit</a></td>
+                    <td><a href="/delete_certification/{{certification.certificationID}}">Delete</a></td>
+                </tr>
             {% endfor %}
         </table>
         <p>&nbsp;</p>
