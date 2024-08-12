@@ -1,0 +1,58 @@
+<html>
+<!--
+ Original UI design
+ credit Prof. Danielle Safonte
+ bsg_people_app
+ https://github.com/osu-cs340-ecampus/flask-starter-app/tree/24f289773ee051ebb8c83822bd78441ccb1dad33/bsg_people_app
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutual Aid Caregiving</title>
+    <link rel="stylesheet" href="./static/css/main.css">
+</head>
+<body>
+
+    <header>
+        <h1>Mutual Aid Caregiving</h1>
+        <nav>
+            <ul>
+            <li><a href="/index">Home</a></li>
+            <li><a href="/neighbors">Neighbors</a></li>
+            <li><a href="/locations">Locations</a></li>
+            <li><a href="/communities">Communities</a></li>
+            <li><a href="/visits">Visits</a></li>
+            <li><a href="/certifications">Certifications</a></li>
+            <li><a href="/visit_types">Visit Types</a></li>
+            <li><a href="/certify_neighbors">Certify Neighbors</a></li>
+            <li><a href="/community_neighbors">Community Neighbors</a></li>
+            <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <main>
+
+            
+            <form id="add_visit_type" action="/add_visit_type" method="post">
+			<legend><Add a Neighbor</legend>
+			<fieldset>
+
+				<label for="make">Category Name of Visit:</label>
+				<input type="text" class="form-control" id="typeName" name="typeName" placeholder="" required>
+
+				<label for="model">Description of Visit Type</label>
+				<input type="text" class="form-control" id="typeDescription" name="typeDescription" placeholder="" required>
+
+            </fieldset>
+
+			<input type="submit" value="Add Visit Type" name="add_visit_type">
+            </form>
+
+    </main>
+    <footer>
+        <p>Made by Chris Blum and Sara Nettle 2024</p>
+    </footer>
+    </body>
+    </html>

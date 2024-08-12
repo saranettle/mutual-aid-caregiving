@@ -1,0 +1,59 @@
+<html>
+<!--
+ Original UI design
+ credit Prof. Danielle Safonte
+ bsg_people_app
+ https://github.com/osu-cs340-ecampus/flask-starter-app/tree/24f289773ee051ebb8c83822bd78441ccb1dad33/bsg_people_app
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutual Aid Caregiving</title>
+    <link rel="stylesheet" href="../../static/css/main.css">
+</head>
+<body>
+
+    <header>
+        <h1>Mutual Aid Caregiving</h1>
+        <nav>
+            <ul>
+            <li><a href="/index">Home</a></li>
+            <li><a href="/neighbors">Neighbors</a></li>
+            <li><a href="/locations">Locations</a></li>
+            <li><a href="/communities">Communities</a></li>
+            <li><a href="/visits">Visits</a></li>
+            <li><a href="/certifications">Certifications</a></li>
+            <li><a href="/visit_types">Visit Types</a></li>
+            <li><a href="/certify_neighbors">Certify Neighbors</a></li>
+            <li><a href="/community_neighbors">Community Neighbors</a></li>
+            <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <main>
+
+            <form id="edit_visit_type" action="/edit_visit_type/{{data[0].visitTypeID}}" method="post">
+			<legend>Edit Visit Type</legend>
+			<fieldset>
+
+                <input type="hidden" value="{{data[0].visitTypeID}}" class="form-control" id="visitTypeID" name="visitTypeID" required>
+
+				<label for="make">Visit Type Name</label>
+				<input type="text" class="form-control" id="typeName" name="typeName" value="{{data[0].typeName}}" required>
+
+				<label for="model">Visit Type Description</label>
+				<input type="text" class="form-control" id="typeDescription" name="typeDescription" value="{{data[0].typeDescription}}" required>
+
+            </fieldset>
+
+			<input type="submit" value="Edit Visit Type" name="edit_visit_type">
+            </form>
+
+    </main>
+    <footer>
+        <p>Made by Chris Blum and Sara Nettle 2024</p>
+    </footer>
+    </body>
+    </html>

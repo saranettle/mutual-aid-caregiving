@@ -35,11 +35,6 @@
 
     <main>
             <p>On this page, you can view all of the visits, edit the visits, or delete them. Note that these visits are not filtered by community. Also note that when creating a visit, you do not need to add a caregiver immediately, since this may be fulfilled by another neighbor.</p>
-            <!--
-            SELECT visitID, CONCAT(carereceivers.firstName,' ',carereceivers.lastName) AS \"Neighbor\", 
-            CONCAT(caregivers.firstName,' ',caregivers.lastName) AS \"careGiverName\", startTime, durationHours, 
-            typeName visitType, locationName location, visitNotes, fulfilled
-            --!>
             
             <table>
             <!-- Access data tuple passed from app.py --> 
@@ -69,16 +64,14 @@
                             {% endfor %}
 
                             <!-- Create our edit/delete buttons -->
-						    <td><a>Edit</a></td>
-						    <td><a>Delete</a></td>
+						    <td><a href="edit_visit/{{item.visitID}}" class="btn btn-default">Edit</a></td>
+						    <td><a href="delete_visit/{{item.visitID}}" class="btn btn-default">Delete</a></td>
 
 					    </tr> 
                         {% endfor %} 
                 {% endif %} 
             </table>   
-
-
-    
+ 
     </main>
 
     <footer>

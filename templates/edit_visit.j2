@@ -1,0 +1,90 @@
+<html>
+<!--
+ Original UI design
+ credit Prof. Danielle Safonte
+ bsg_people_app
+ https://github.com/osu-cs340-ecampus/flask-starter-app/tree/24f289773ee051ebb8c83822bd78441ccb1dad33/bsg_people_app
+-->
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mutual Aid Caregiving</title>
+    <link rel="stylesheet" href="../../static/css/main.css">
+</head>
+<body>
+
+    <header>
+        <h1>Mutual Aid Caregiving</h1>
+        <nav>
+            <ul>
+            <li><a href="/index">Home</a></li>
+            <li><a href="/neighbors">Neighbors</a></li>
+            <li><a href="/locations">Locations</a></li>
+            <li><a href="/communities">Communities</a></li>
+            <li><a href="/visits">Visits</a></li>
+            <li><a href="/certifications">Certifications</a></li>
+            <li><a href="/visit_types">Visit Types</a></li>
+            <li><a href="/certify_neighbors">Certify Neighbors</a></li>
+            <li><a href="/community_neighbors">Community Neighbors</a></li>
+            <li><a href="/about">About</a></li>
+            </ul>
+        </nav>
+    </header>
+    
+
+    <main>
+
+            <form id="edit_visit" action="/edit_visit/{{data[0].visitID}}" method="post">
+			<legend><Edit Visit Details</legend>
+			<fieldset>
+
+                <input type="hidden" value="{{data[0].visitID}}" class="form-control" id="visitID" name="visitID" required>
+
+				<label for="neighborName">Choose the neighbor (making the request)</label>
+                <select id="neighborName" name="neighborName">
+                    <option value="{{data[0].neighborID}}">{{ data[0].Neighbor }}</option>
+
+                    {% for neighbor in neighbors %}
+                        <option value="{{ neighbor.neighborID }}"> {{neighbor.neighborName}}</option>
+                        <!-- End of this for loop -->
+                    {% endfor %}
+                </select>
+
+                <label for="locationName">Choose your location</label>
+                <select id="locationName" name="locationName">
+                    <option value="{{ data[0].locationID }}">{{ data[0].location }}</option>
+
+                    {% for location in locations %}
+                        <option value="{{ location.locationID }}"> {{location.locationName}}</option>
+                        <!-- End of this for loop -->
+                    {% endfor %}
+                </select>
+
+
+                <label for="startTime">Select the date and start time of your visit request</label>
+                <input type="datetime-local" id="startTime" name="startTime" value="{{ data[0].startTime }}">
+
+                <label for="durationHours">How long is your visit request? (Full hours only)</label>
+                <input type="number" id="durationHours" name="durationHours" value={{ data[0].durationHours }}>
+
+                <label for="visitType">What type of visit is this?</label>
+                <select id="visitType" name="visitType">
+                    <option value="{{ data[0].visitTypeID }}">{{ data[0].visitType }}</option>
+
+                    {% for visit_type in visit_types %}
+                        <option value="{{ visit_type.visitTypeID }}"> {{visit_type.typeName}}</option>
+                        <!-- End of this for loop -->
+                    {% endfor %}
+                </select>
+				
+            </fieldset>
+
+			<input type="submit" value="Edit Visit" name="edit_visit">
+            </form>
+
+    </main>
+    <footer>
+        <p>Made by Chris Blum and Sara Nettle 2024</p>
+    </footer>
+    </body>
+    </html>
