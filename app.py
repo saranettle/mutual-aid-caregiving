@@ -238,12 +238,13 @@ def edit_visit(visitID):
             location = request.form["locationName"]
             startTime = request.form["startTime"]
             durationHours = request.form["durationHours"]
-            visitType = request.form["visitType"]            
+            visitType = request.form["visitType"]
+            visitNotes = request.form["visitNotes"]
 
             query = ("UPDATE Visits SET Visits.neighbor = %s, Visits.location = %s, Visits.startTime = %s, "
-                     "Visits.durationHours = %s, visitType = %s WHERE Visits.visitID = %s")
+                     "Visits.durationHours = %s, visitType = %s, visitNotes = %s WHERE Visits.visitID = %s")
             cur = mysql.connection.cursor()
-            cur.execute(query, (neighbor, location, startTime, durationHours, visitType, visitID))
+            cur.execute(query, (neighbor, location, startTime, durationHours, visitType, visitNotes, visitID))
             mysql.connection.commit()
 
             return redirect("/visits")
